@@ -1,0 +1,833 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>نزوري — متجر القهوة المختصة</title>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Lalezar&family=Amiri:ital,wght@0,400;0,700;1,400&family=Changa:wght@300..700&display=swap">
+<style>
+/* Layout concept: a Saudi heritage storefront. Calligraphic display (Aref Ruqaa) carries the
+   brand voice; Lalezar gives product names weight; Changa keeps Arabic running text readable.
+   Identity is fixed to the logo: ink brown, cream ground, burnt-orange accent, gold detail. */
+:root {
+  --bg: #F4ECDF; --surface: #FBF6EE; --ink: #361F24; --muted: #6E5A5E;
+  --accent: #B8492A; --accent-ink: #FFF7EE; --line: #E2D5C2; --gold: #7C5A24;
+  --hero: #361F24; --hero-ink: #F4ECDF; --hero-muted: #D9C8B4; --sand: #E9DCC6;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #1B1013; --surface: #261619; --ink: #F4ECDF; --muted: #B9A59F;
+    --accent: #E07A4F; --accent-ink: #1B1013; --line: #3D282C; --gold: #D4A565;
+    --hero: #22141A; --hero-ink: #F4ECDF; --hero-muted: #C9B5A5; --sand: #3A2429; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #1B1013; --surface: #261619; --ink: #F4ECDF; --muted: #B9A59F;
+  --accent: #E07A4F; --accent-ink: #1B1013; --line: #3D282C; --gold: #D4A565;
+  --hero: #22141A; --hero-ink: #F4ECDF; --hero-muted: #C9B5A5; --sand: #3A2429; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+section[id] { scroll-margin-top: 92px; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink); direction: rtl; text-align: start;
+  font-family: "Changa", "Segoe UI", Tahoma, sans-serif; font-size: 16px; line-height: 1.75;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+h1, h2, h3, h4 { margin: 0; text-wrap: balance; }
+.display { font-family: "Aref Ruqaa", "Amiri", serif; font-weight: 700; line-height: 1.3; }
+.lalezar { font-family: "Lalezar", "Changa", sans-serif; font-weight: 400; }
+button { font: inherit; cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.wrap { max-width: 1180px; margin-inline: auto; }
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; font-weight: 700; color: var(--gold); letter-spacing: .02em; }
+.eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--gold); }
+.sec { padding-block: 84px; }
+@media (max-width: 800px) { .sec { padding-block: 56px; } .hero h1 { font-size: clamp(34px, 9vw, 48px); } .chips span, .sold-badge { font-size: 14px; } }
+.sec-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 14px 28px; margin-bottom: 36px; }
+.sec-head h2 { font-size: clamp(34px, 5vw, 52px); margin-top: 10px; }
+.sec-head p { margin: 0; color: var(--muted); max-width: 46ch; }
+.reveal { opacity: 1; }
+
+/* demo notice */
+.notice { background: var(--gold); color: #1B1013; font-size: 13px; text-align: center; padding: 9px 16px; font-weight: 700; margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); }
+
+/* header */
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 30; background: var(--hero); color: var(--hero-ink); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-inline: max(16px, env(safe-area-inset-left, 0px)); transition: box-shadow .3s; }
+.topbar.scrolled { box-shadow: 0 10px 30px rgba(0,0,0,.25); }
+.topbar-in { display: flex; align-items: center; gap: 18px; min-height: 72px; }
+.brand img { height: 48px; width: auto; border-radius: 8px; }
+.nav { display: flex; gap: 24px; margin-inline-start: auto; }
+.nav a { text-decoration: none; font-size: 15px; opacity: .85; position: relative; padding-block: 4px; }
+.nav a::after { content: ""; position: absolute; inset-inline: 0; bottom: -2px; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: right; transition: transform .3s; }
+.nav a:hover { opacity: 1; }
+.nav a:hover::after { transform: scaleX(1); }
+.cart-btn { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 999px; padding: 10px 18px; font-weight: 700; display: inline-flex; gap: 8px; align-items: center; }
+.cart-btn b { background: var(--accent-ink); color: var(--accent); border-radius: 999px; min-width: 24px; height: 24px; display: inline-grid; place-items: center; font-size: 13px; }
+@media (max-width: 800px) { .topbar-in { flex-wrap: wrap; padding-block: 8px; } .nav { order: 3; width: 100%; margin-inline-start: 0; overflow-x: auto; gap: 18px; padding-bottom: 10px; scrollbar-width: none; } .nav a { white-space: nowrap; font-size: 14px; } }
+
+/* hero */
+.hero { background: radial-gradient(120% 90% at 85% 10%, #4A2A30 0%, var(--hero) 55%); color: var(--hero-ink); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-inline: max(16px, env(safe-area-inset-left, 0px)); position: relative; overflow: hidden; }
+.hero::after { content: ""; position: absolute; inset: auto -10% -40% auto; width: 60vw; height: 60vw; border-radius: 50%; background: radial-gradient(closest-side, rgba(184,73,42,.35), transparent); pointer-events: none; }
+.hero-in { display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center; padding-block: 72px 84px; position: relative; z-index: 1; }
+.hero h1 { font-size: clamp(44px, 7vw, 84px); margin-top: 18px; color: var(--hero-ink); }
+.hero h1 .w { display: inline-block; }
+.hero h1 em { font-style: normal; color: #E8A17C; }
+.hero p.lead { font-size: 19px; color: var(--hero-muted); max-width: 42ch; margin: 22px 0 32px; }
+.hero .eyebrow { color: #D4A565; }
+.hero .eyebrow::before { background: #D4A565; }
+.btns { display: flex; flex-wrap: wrap; gap: 12px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 0 26px; border-radius: 999px; border: 1.5px solid transparent; font-weight: 700; text-decoration: none; transition: transform .25s, background .25s, color .25s; }
+.btn:hover { transform: translateY(-2px); }
+.btn-primary { background: var(--accent); color: var(--accent-ink); box-shadow: 0 12px 26px -10px rgba(184,73,42,.7); }
+.btn-ghost { border-color: rgba(244,236,223,.5); color: var(--hero-ink); }
+.btn-ghost:hover { border-color: var(--hero-ink); }
+.stage { perspective: 1400px; position: relative; }
+.hero-img { border-radius: 22px; overflow: hidden; aspect-ratio: 16 / 9; transform-style: preserve-3d; transition: transform .6s cubic-bezier(.2,.7,.2,1); box-shadow: 0 40px 70px -30px rgba(0,0,0,.55); will-change: transform; }
+.hero-img img { width: 100%; height: 100%; object-fit: cover; }
+.float-badge { position: absolute; background: var(--surface); color: var(--ink); border-radius: 18px; padding: 14px 18px; box-shadow: 0 20px 40px -18px rgba(0,0,0,.5); display: grid; gap: 2px; min-width: 150px; }
+.float-badge b { font-family: "Lalezar", sans-serif; font-weight: 400; font-size: 26px; color: var(--accent); line-height: 1; }
+.float-badge span { font-size: 13px; color: var(--muted); }
+.fb1 { bottom: -22px; inset-inline-start: -18px; }
+.fb2 { top: 18px; inset-inline-end: -14px; }
+@media (max-width: 900px) { .hero-in { grid-template-columns: 1fr; padding-block: 44px 64px; gap: 40px; } .fb2 { inset-inline-end: 10px; } .fb1 { inset-inline-start: 10px; } }
+
+/* marquee */
+.marquee { background: var(--accent); color: var(--accent-ink); overflow: hidden; margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-block: 16px; white-space: nowrap; }
+.marquee-track { direction: ltr; display: inline-flex; gap: 40px; animation: slide 38s linear infinite; font-family: "Lalezar", sans-serif; font-size: 26px; padding-inline-end: 40px; }
+.marquee-track span::after { content: "✦"; margin-inline-start: 40px; opacity: .6; font-family: Amiri, serif; font-size: 20px; vertical-align: middle; }
+@keyframes slide { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+
+/* trust */
+.trust { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
+.trust div { padding: 26px 18px; border-inline-start: 1px solid var(--line); }
+.trust div:first-child { border-inline-start: 0; }
+.trust strong { display: block; font-family: "Lalezar", sans-serif; font-weight: 400; font-size: 20px; }
+.trust span { font-size: 14px; color: var(--muted); }
+@media (max-width: 760px) { .trust { grid-template-columns: 1fr 1fr; } .trust div:nth-child(3) { border-inline-start: 0; } .trust div:nth-child(n+3) { border-top: 1px solid var(--line); } }
+
+/* origins: real data from the store */
+.offer { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; background: var(--surface); border: 1px solid var(--line); border-radius: 28px; padding: 28px; }
+.offer-media img { width: 100%; border-radius: 20px; aspect-ratio: 4 / 3.4; object-fit: cover; }
+.offer-copy h2 { font-size: clamp(34px, 5vw, 50px); margin: 10px 0 10px; }
+.offer-copy p { color: var(--muted); margin: 0 0 14px; }
+.offer-price { display: flex; align-items: baseline; gap: 10px; margin: 6px 0 18px; color: var(--accent); }
+.offer-price .lalezar { font-size: 58px; line-height: 1; }
+.offer-price small { color: var(--muted); font-size: 15px; }
+.btn-ghost-dark { border-color: var(--ink); color: var(--ink); }
+@media (max-width: 860px) { .offer { grid-template-columns: 1fr; padding: 16px; gap: 22px; } }
+.origins { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+.origin { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 22px 18px; display: flex; flex-direction: column; gap: 10px; min-width: 0; transform-style: preserve-3d; transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s, border-color .3s; will-change: transform; }
+.origin:hover { box-shadow: 0 30px 50px -28px rgba(54,31,36,.5); border-color: var(--accent); }
+.img-wrap { position: relative; }
+.sold-badge { position: absolute; top: 10px; inset-inline-start: 10px; background: var(--accent); color: var(--accent-ink); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 999px; }
+.origin-img { width: 100%; height: auto; aspect-ratio: auto; object-fit: contain; border-radius: 14px; background: var(--sand); margin-bottom: 4px; display: block; }
+.origin .country { font-size: 13px; color: var(--gold); font-weight: 700; }
+.origin h3 { font-family: "Lalezar", sans-serif; font-weight: 400; font-size: 24px; line-height: 1.2; }
+.origin .meta { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.origin .price { font-family: "Lalezar", sans-serif; font-size: 30px; line-height: 1; margin-top: 4px; }
+.origin .price small { font-family: "Changa", sans-serif; font-size: 13px; color: var(--muted); margin-inline-start: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips span { font-size: 12px; padding: 3px 10px; border-radius: 999px; background: var(--sand); color: var(--ink); }
+.origin .act { margin-top: auto; padding-top: 6px; }
+.sold { display: inline-flex; align-items: center; justify-content: center; width: 100%; min-height: 44px; border-radius: 999px; border: 1.5px solid var(--accent); color: var(--accent); background: transparent; text-decoration: none; font-weight: 700; font-size: 14px; }
+.sold:hover { background: var(--accent); color: var(--accent-ink); }
+@media (max-width: 1000px) { .origins { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .origins { grid-template-columns: 1fr; } }
+
+/* products */
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; transform-style: preserve-3d; transition: transform .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s; will-change: transform; }
+.card:hover { box-shadow: 0 30px 50px -28px rgba(54,31,36,.5); }
+.pack { aspect-ratio: 1 / 1; display: grid; place-items: center; position: relative; padding: 24px; text-align: center; color: var(--hero-ink); background: radial-gradient(120% 90% at 30% 10%, #5A3439, var(--hero)); }
+.pack.alt { background: radial-gradient(120% 90% at 30% 10%, #B8603D, #7A3B24); }
+.pack.light { background: radial-gradient(120% 90% at 30% 10%, #FBF6EE, var(--sand)); color: var(--ink); }
+.pack-svg { position: absolute; inset: 0; display: grid; place-items: center; padding: 16%; }
+.pack-svg svg { width: 100%; height: 100%; max-width: 100%; }
+.pack-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.pack h3 { font-family: "Aref Ruqaa", serif; font-size: 30px; font-weight: 700; line-height: 1.3; }
+.pack small { display: block; margin-top: 8px; opacity: .8; font-size: 13px; letter-spacing: .08em; }
+.pack .tag { position: absolute; top: 14px; inset-inline-start: 14px; background: var(--accent); color: var(--accent-ink); font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 999px; }
+.card-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
+.card-body h4 { font-family: "Lalezar", sans-serif; font-weight: 400; font-size: 20px; }
+.card-body p { margin: 0; font-size: 14px; color: var(--muted); }
+.price-row { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 10px; padding-top: 14px; }
+.price-row .price { font-family: "Lalezar", sans-serif; font-size: 24px; }
+.price-row .price small { font-family: "Changa", sans-serif; font-size: 13px; color: var(--muted); margin-inline-start: 4px; }
+.add { background: var(--ink); color: var(--bg); border: 0; border-radius: 999px; padding: 10px 18px; font-weight: 700; font-size: 14px; transition: background .25s, color .25s; }
+.add:hover { background: var(--accent); color: var(--accent-ink); }
+.verify { font-size: 12px; color: var(--gold); }
+@media (max-width: 1000px) { .grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 520px) { .grid { gap: 12px; } .card-body { padding: 14px; } .price-row .price { font-size: 20px; } .pack h3 { font-size: 24px; } }
+.note-small { font-size: 13px; color: var(--muted); margin-top: 20px; }
+
+/* brew guide */
+.guide { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 28px; min-width: 0; }
+.panel h3 { font-family: "Lalezar", sans-serif; font-weight: 400; font-size: 26px; margin-bottom: 14px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: start; padding: 12px 6px; border-bottom: 1px solid var(--line); }
+th { color: var(--muted); font-weight: 600; font-size: 14px; }
+.table-wrap { overflow-x: auto; }
+.days { display: grid; grid-template-columns: 1fr 1.4fr 1fr; margin-top: 14px; border-radius: 16px; overflow: hidden; border: 1px solid var(--line); }
+.days div { padding: 18px 8px; text-align: center; font-size: 14px; background: var(--surface); }
+.days div.peak { background: var(--accent); color: var(--accent-ink); }
+.days b { display: block; font-family: "Lalezar", sans-serif; font-weight: 400; font-size: 30px; line-height: 1.1; }
+@media (max-width: 860px) { .guide { grid-template-columns: 1fr; } }
+
+/* quote + pillars */
+.quote-band { text-align: center; padding: 56px 0 24px; }
+.quote { font-family: "Aref Ruqaa", serif; font-style: normal; font-size: clamp(30px, 4.6vw, 48px); line-height: 1.5; max-width: 22ch; margin: 0 auto; }
+.quote-mark { font-family: "Aref Ruqaa", serif; font-size: 90px; color: var(--accent); line-height: .6; display: block; }
+.pillars { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 48px; border-top: 2px solid var(--ink); }
+.pillar { padding: 28px 26px 0 0; }
+.pillar + .pillar { padding-inline-start: 26px; border-inline-start: 1px solid var(--line); }
+.pillar h3 { font-family: "Lalezar", sans-serif; font-weight: 400; font-size: 26px; margin: 10px 0 8px; }
+.pillar p { margin: 0; color: var(--muted); }
+@media (max-width: 860px) { .pillars { grid-template-columns: 1fr; } .pillar + .pillar { padding-inline-start: 0; border-inline-start: 0; border-top: 1px solid var(--line); margin-top: 22px; } }
+
+/* reviews: horizontal rail on phones */
+.rating { display: flex; align-items: center; gap: 14px; margin-top: 14px; flex-wrap: wrap; }
+.rating strong { font-family: "Lalezar", sans-serif; font-weight: 400; font-size: 44px; line-height: 1; }
+.stars { color: var(--gold); letter-spacing: 3px; font-size: 18px; }
+.shots { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin: 0; padding: 0; list-style: none; }
+.shots figure { margin: 0; }
+.shots img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; border-radius: 18px; border: 1px solid var(--line); display: block; }
+@media (max-width: 800px) { .shots { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 12px; padding-bottom: 6px; scrollbar-width: none; } .shots figure { flex: 0 0 62%; scroll-snap-align: start; } }
+.reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.review { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 24px; display: flex; flex-direction: column; gap: 14px; margin: 0; min-width: 0; }
+.review p { margin: 0; font-size: 17px; line-height: 1.8; }
+.review .who { margin-top: auto; font-size: 14px; color: var(--muted); font-weight: 700; }
+@media (max-width: 860px) { .reviews { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 14px; margin-inline: -16px; padding-inline: 16px; padding-bottom: 8px; } .review { flex: 0 0 82%; scroll-snap-align: start; } }
+
+/* FAQ */
+.faq { display: grid; gap: 10px; max-width: 840px; }
+.faq details { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 0 22px; }
+.faq summary { list-style: none; cursor: pointer; padding: 20px 0; font-family: "Lalezar", sans-serif; font-size: 20px; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: "+"; font-family: "Changa", sans-serif; font-size: 26px; color: var(--accent); line-height: 1; transition: transform .3s; }
+.faq details[open] summary::after { transform: rotate(45deg); }
+.faq details p { margin: 0 0 20px; color: var(--muted); }
+
+/* contact */
+.contact { display: grid; grid-template-columns: 1.1fr 1fr; gap: 20px; }
+.c-card { background: var(--hero); color: var(--hero-ink); border-radius: 26px; padding: 34px; display: grid; gap: 18px; align-content: start; }
+.c-card h3 { font-family: "Lalezar", sans-serif; font-weight: 400; font-size: 30px; }
+.c-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; justify-content: space-between; border-bottom: 1px solid rgba(244,236,223,.14); padding-bottom: 14px; }
+.c-row:last-child { border-bottom: 0; }
+.c-row span { color: var(--hero-muted); font-size: 14px; }
+.c-row bdi { font-size: 18px; font-weight: 600; direction: ltr; }
+.c-links { display: flex; flex-wrap: wrap; gap: 10px; }
+.c-links a, .copy { text-decoration: none; border: 1px solid rgba(244,236,223,.3); color: var(--hero-ink); border-radius: 999px; padding: 8px 14px; font-size: 14px; background: transparent; }
+.c-links a:hover, .copy:hover { border-color: #E8A17C; color: #E8A17C; }
+.wa-big { background: var(--accent) !important; border-color: var(--accent) !important; color: #fff !important; font-weight: 700; }
+.policy { display: grid; gap: 12px; align-content: start; }
+.policy a { background: var(--surface); border: 1px solid var(--line); border-radius: 18px; padding: 20px 22px; text-decoration: none; display: flex; justify-content: space-between; align-items: center; font-family: "Lalezar", sans-serif; font-size: 20px; }
+.policy a:hover { border-color: var(--accent); }
+.policy a::after { content: "←"; color: var(--accent); font-family: "Changa", sans-serif; }
+@media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+
+/* footer */
+footer { background: var(--hero); color: var(--hero-ink); margin-inline: calc(-1 * max(16px, env(safe-area-inset-left, 0px))); padding-inline: max(16px, env(safe-area-inset-left, 0px)); padding-block: 60px 30px; }
+.foot { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 32px; }
+.foot h4 { font-family: "Lalezar", sans-serif; font-weight: 400; font-size: 20px; margin: 0 0 12px; color: #D4A565; }
+.foot p, .foot a, .foot li { font-size: 15px; opacity: .88; }
+.foot ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.foot a { text-decoration: none; }
+.foot a:hover { color: #E8A17C; opacity: 1; }
+.legal { margin-top: 40px; padding-top: 20px; border-top: 1px solid #4A3137; font-size: 13px; opacity: .7; display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; }
+@media (max-width: 760px) { .foot { grid-template-columns: 1fr; } }
+
+/* floating whatsapp */
+.wa { position: fixed; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); inset-inline-end: calc(16px + env(safe-area-inset-right, 0px)); z-index: 35; background: var(--accent); color: #fff; border-radius: 999px; padding: 13px 20px; text-decoration: none; font-weight: 700; box-shadow: 0 14px 30px -10px rgba(0,0,0,.45); }
+
+/* cart drawer (physical left edge; hidden state moves fully off-screen) */
+.scrim { position: fixed; inset: 0; background: rgba(20,10,12,.55); opacity: 0; pointer-events: none; transition: opacity .3s; z-index: 40; }
+.scrim.open { opacity: 1; pointer-events: auto; }
+.drawer { position: fixed; top: 0; bottom: 0; left: 0; width: min(420px, 100%); background: var(--bg); color: var(--ink); z-index: 41; transform: translateX(-105%); visibility: hidden; transition: transform .35s cubic-bezier(.2,.7,.2,1), visibility .35s; display: flex; flex-direction: column; padding: max(20px, env(safe-area-inset-top, 0px)) max(20px, env(safe-area-inset-right, 0px)) max(20px, env(safe-area-inset-bottom, 0px)) max(20px, env(safe-area-inset-left, 0px)); box-shadow: 10px 0 40px rgba(0,0,0,.3); }
+.drawer.open { transform: translateX(0); visibility: visible; }
+.drawer header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+.drawer h3 { font-family: "Lalezar", sans-serif; font-weight: 400; font-size: 30px; }
+.close { background: transparent; border: 1px solid var(--line); color: var(--ink); border-radius: 999px; width: 42px; height: 42px; font-size: 18px; }
+.lines { flex: 1; overflow-y: auto; display: grid; gap: 10px; align-content: start; }
+.line { display: flex; justify-content: space-between; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; }
+.line .qty { font-size: 13px; color: var(--muted); }
+.empty { color: var(--muted); padding: 40px 0; text-align: center; }
+.sum { border-top: 1px solid var(--line); padding-top: 14px; display: grid; gap: 10px; }
+.sum .tot { display: flex; justify-content: space-between; font-family: "Lalezar", sans-serif; font-size: 24px; }
+.checkout { min-height: 52px; border-radius: 999px; border: 0; background: var(--ink); color: var(--bg); font-weight: 700; opacity: .45; }
+.disclaimer { font-size: 13px; color: var(--muted); margin: 0; }
+
+.toast { position: fixed; bottom: calc(88px + env(safe-area-inset-bottom, 0px)); inset-inline-start: 50%; transform: translateX(50%) translateY(20px); background: var(--ink); color: var(--bg); padding: 12px 20px; border-radius: 999px; font-weight: 700; opacity: 0; transition: .3s; z-index: 50; pointer-events: none; white-space: nowrap; }
+.toast.show { opacity: 1; transform: translateX(50%) translateY(0); }
+
+/* pre-motion: content stays visible; GSAP only adds entrance motion when it loads */
+.js .anim-init { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .origin, .card, .hero-img { transition: none !important; } }
+
+/* motion + 3D layer */
+.hero-img img { will-change: transform; }
+.fb1, .fb2 { will-change: transform; }
+@media (hover: hover) and (pointer: fine) {
+  .card, .origin { transition: translate .6s cubic-bezier(.2,.7,.2,1), box-shadow .6s; }
+  .card:hover, .origin:hover { translate: 0 -6px; box-shadow: 0 30px 60px -28px rgba(54,31,36,.35); }
+}
+.sec-head h2 { background: linear-gradient(90deg, var(--ink) 0%, var(--ink) 60%, var(--accent) 100%); -webkit-background-clip: text; background-clip: text; }
+@media (prefers-reduced-motion: reduce) { .card, .origin, .hero-img img, .fb1, .fb2 { transition: none !important; animation: none !important; } }
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,600;0,800;1,700&display=swap" rel="stylesheet">
+<style>
+.lang-btn { display:inline-flex; align-items:center; justify-content:center; min-height:40px; min-width:52px; padding:0 14px; border-radius:999px; border:1.5px solid currentColor; background:transparent; color:inherit; font:700 14px/1 inherit; cursor:pointer; font-family:"Inter",sans-serif; letter-spacing:.04em; }
+.lang-btn:hover { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+html.en body { font-family: "Inter", system-ui, sans-serif; letter-spacing: -.005em; }
+html.en body { direction: ltr; text-align: start; }
+html.en .hero h1 { font-size: clamp(40px, 5.4vw, 70px); line-height: 1.04; }
+html.en .hero h1 .w { display: inline; }
+html.en .hero-copy, html.en .hero { text-align: start; }
+html.en .display, html.en h1, html.en h2, html.en h3 { font-family: "Playfair Display", Georgia, serif; font-weight: 800; letter-spacing: -.01em; }
+html.en .hero h1 em { font-style: italic; }
+html.en .quote { font-family: "Playfair Display", Georgia, serif; font-style: italic; }
+@media (max-width: 800px) { .fb2 { display: none; } }
+@media (hover: none) { .hero-img { transform: none !important; } }
+.hero :focus-visible, footer :focus-visible { outline-color: #E8A17C; }
+.btn-add, .add { white-space: nowrap; }
+.cart-sum { margin-inline-start: 8px; font-weight: 600; opacity: .85; }
+.wa-order { display:flex; align-items:center; justify-content:center; min-height:52px; border-radius:999px; background:#128C4A; color:#fff; font-weight:700; text-decoration:none; margin-top:12px; }
+.wa-order:hover { filter: brightness(1.06); }
+.welcome-line { margin: 14px 0 0; font-family: "Aref Ruqaa", serif; font-size: clamp(20px, 2.4vw, 26px); color: #E8A17C; }
+html.en .welcome-line { font-family: "Playfair Display", Georgia, serif; font-style: italic; }
+</style>
+
+<div class="notice">تصور مقترح لإعادة تصميم المتجر بنفس الشعار والهوية. هذه ليست صفحة المتجر الرسمية، والشراء غير مفعّل في هذه النسخة</div>
+
+<header class="topbar" id="top-bar">
+  <div class="wrap topbar-in">
+    <a class="brand" href="#top" aria-label="نزوري">
+      <img src="img/5528064d2209.webp" alt="نزوري | nzuri">
+    </a>
+    <nav class="nav" aria-label="القائمة الرئيسية">
+      <a href="#origins">أصول القهوة</a>
+      <a href="#shop">المنتجات</a>
+      <a href="#guide">دليل التحضير</a>
+      <a href="#reviews">آراء العملاء</a>
+      <a href="#contact">تواصل معنا</a>
+    </nav>
+    <button class="cart-btn" id="cartOpen" aria-label="سلة المشتريات">السلة <b id="cartCount">0</b><span id="cartSum" class="cart-sum"></span></button>
+    <button class="lang-btn" id="langBtn" type="button" aria-label="Switch language">EN</button>
+  </div>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap hero-in">
+    <div>
+      <div class="eyebrow">محمصة نزوري · قهوة مختصة من أصول مختارة</div>
+      <h1 class="display"><span class="w">قهوة</span> <span class="w">تُحمَّص</span> <span class="w">بعناية،</span> <em class="w">وتصلك</em> <span class="w">في</span> <span class="w">أفضل</span> <span class="w">حالها</span></h1>
+      <p class="lead">بن مختص من خمس أصول عالمية، يُحمَّص بحسب نكهة كل صنف، ويُوصَل إلى باب بيتك داخل المملكة.</p>
+      <p class="welcome-line" data-en="Every bag tells a story, and you are the next chapter.">كل كيس يحكي قصة، وأنت الفصل الجديد فيها.</p>
+      <div class="btns">
+        <a class="btn btn-primary" href="#origins">استكشف الأصول</a>
+        <a class="btn btn-ghost" href="#guide">دليل التحضير</a>
+      </div>
+    </div>
+    <div class="stage">
+      <div class="hero-img" id="heroTilt"><img src="img/hero-hd.webp" alt="منتجات نزوري للقهوة المختصة" width="1050" height="592"></div>
+      <div class="float-badge fb1"><b>250 جم</b><span>لكل محصول، تحميص متوسط</span></div>
+      <div class="float-badge fb2"><b dir="ltr">7–21</b><span>يوماً بعد التحميص: غالباً ذروة النكهة</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="marquee" aria-hidden="true"><div class="marquee-track">
+  <span>كولومبيا كالداس</span><span>رواندا هويا</span><span>أوغندا جبال رينزوري</span><span>مينيرو البرازيلية</span><span>إثيوبيا هامبيلا</span>
+  <span>كولومبيا كالداس</span><span>رواندا هويا</span><span>أوغندا جبال رينزوري</span><span>مينيرو البرازيلية</span><span>إثيوبيا هامبيلا</span>
+</div></div>
+
+<section class="trust wrap" aria-label="ضمانات">
+  <div><strong>توصيل داخل السعودية</strong><span>تفاصيل الشحن في صفحة المتجر الرسمية</span></div>
+  <div><strong>استبدال واسترجاع</strong><span>سياسة مكتوبة وواضحة</span></div>
+  <div><strong>دفع بعدة طرق</strong><span>طرق الدفع تظهر للعميل عند إتمام الطلب في المتجر</span></div>
+  <div style="display:flex;gap:10px;align-items:center"><img src="img/saudi-emblem.webp" alt="شعار المملكة العربية السعودية" width="40" height="40" style="border-radius:6px;flex:none;object-fit:contain"><div><strong>منشأة مسجّلة</strong><span>السجل التجاري 7054900928</span></div></div>
+</section>
+
+
+
+<section class="sec wrap" id="origins">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">أصول القهوة</div>
+      <h2 class="display">خمس نكهات من حول العالم</h2>
+    </div>
+    <p>الأسعار للعبوة 250 جم كما هي في المتجر. اختر حسب ذوقك: شوكولاتة، فواكه، أو زهور.</p>
+  </div>
+  <div class="origins" id="originList"></div>
+  <p class="note-small">حالة التوفر تعكس وضع المتجر وقت إعداد هذا التصور، وقد تتغير.</p>
+</section>
+
+<section class="sec wrap" id="shop" style="padding-top:0">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">المتجر</div>
+      <h2 class="display">مجموعات ومستلزمات</h2>
+    </div>
+    <p>أسعار بالريال السعودي كما هي في المتجر الحالي.</p>
+  </div>
+  <div class="grid" id="grid"></div>
+  <p class="note-small">صور المنتجات مأخوذة من صفحات المتجر الفعلية.</p>
+</section>
+
+<section class="sec wrap" id="guide" style="padding-top:0">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">دليل التحضير</div>
+      <h2 class="display">التحميص والطحن الصحيح</h2>
+    </div>
+    <p>من دليل نزوري الحالي، لتحصل على كوب متوازن في كل مرة.</p>
+  </div>
+  <div class="guide">
+    <div class="panel">
+      <h3>التحميص حسب النكهة</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>النكهة المطلوبة</th><th>التحميص المناسب</th></tr></thead>
+        <tbody>
+          <tr><td>شوكولاتة ومكسرات</td><td>متوسط</td></tr>
+          <tr><td>فواكه وزهور</td><td>فاتح</td></tr>
+          <tr><td>إسبريسو</td><td>متوسط إلى غامق</td></tr>
+          <tr><td>V60 أو الترشيح</td><td>فاتح أو متوسط</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="panel">
+      <h3>درجة الطحن حسب الطريقة</h3>
+      <div class="table-wrap"><table>
+        <thead><tr><th>طريقة التحضير</th><th>درجة الطحن</th></tr></thead>
+        <tbody>
+          <tr><td>V60</td><td>متوسطة</td></tr>
+          <tr><td>كيمكس</td><td>متوسطة إلى خشنة</td></tr>
+          <tr><td>فرنش برس</td><td>خشنة</td></tr>
+          <tr><td>موكا بوت</td><td>ناعمة</td></tr>
+          <tr><td>إسبريسو</td><td>ناعمة جداً</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="panel" style="grid-column:1 / -1">
+      <h3>متى تكون القهوة في أفضل حالاتها؟</h3>
+      <p style="margin:0;color:var(--muted)">غالباً بين 7 و21 يوماً بعد التحميص، وذلك حسب نوع البن وطريقة التحضير.</p>
+      <div class="days" aria-label="نافذة الذروة بعد التحميص">
+        <div><b dir="ltr">1–6</b>أيام</div>
+        <div class="peak"><b dir="ltr">7–21</b>يوماً · الذروة</div>
+        <div><b dir="ltr">+21</b>يوماً</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="quote-band wrap">
+  <span class="quote-mark">“</span>
+  <p class="quote">الطعم الذي نوصله إليك لا يأتي بالصدفة.</p>
+  <div class="pillars">
+    <div class="pillar"><div class="eyebrow">الانتقاء</div><h3>انتقاء استثنائي</h3><p>نختار البن الذي يستحق فعلاً، لا أي محصول.</p></div>
+    <div class="pillar"><div class="eyebrow">الجودة</div><h3>جودة بلا تنازل</h3><p>نختار كل محصول بعناية قبل أن يصل إليك.</p></div>
+    <div class="pillar"><div class="eyebrow">التجربة</div><h3>تجربة متكاملة</h3><p>نهتم أن تصلك القهوة بأفضل حال.</p></div>
+  </div>
+</section>
+
+<section class="sec wrap" id="reviews" style="padding-top:0">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">آراء العملاء</div>
+      <h2 class="display">ماذا قال عملاؤنا</h2>
+      <div class="rating"><span style="color:var(--muted)">آراء منشورة من عملاء المتجر، 7 آراء</span></div>
+    </div>
+  </div>
+  <div class="reviews" id="reviewList"></div>
+</section>
+
+<section class="sec wrap" id="gallery" style="padding-top:0">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">من طلبات عملائنا</div>
+      <h2 class="display">صور حقيقية من المتجر</h2>
+      <p>صور أرسلها عملاء نزوري ومنشورة على الصفحة الرئيسية للمتجر.</p>
+    </div>
+  </div>
+  <div class="shots"><figure><img src="img/11c25d9a5892.webp" alt="عميل يعرض كيس نزوري إثيوبيا هامبيلا" loading="lazy" width="360" height="640"></figure><figure><img src="img/8a6faa54dc8d.webp" alt="كيس نزوري كولومبيا مع ميزان القهوة" loading="lazy" width="360" height="640"></figure><figure><img src="img/b169c646634e.webp" alt="طلبية نزوري مع الأكواب والأكياس" loading="lazy" width="360" height="640"></figure><figure><img src="img/145a2a17a777.webp" alt="طلبية نزوري مرتبة على طاولة" loading="lazy" width="360" height="640"></figure><figure><img src="img/3ca87933205c.webp" alt="كوب نزوري على الميزان أثناء التحضير" loading="lazy" width="360" height="640"></figure><figure><img src="img/3b7072a861c2.webp" alt="صندوق طلبية نزوري كامل" loading="lazy" width="360" height="640"></figure></div>
+</section>
+
+<section class="sec wrap" id="faq" style="padding-top:0">
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">الأسئلة الشائعة</div>
+      <h2 class="display">كل ما تحتاج معرفته</h2>
+    </div>
+  </div>
+  <div class="faq">
+    <details open><summary>ما مدة توصيل الطلبات؟</summary><p>تفاصيل الشحن والتوصيل والمدد متاحة في صفحة الشحن والتوصيل الرسمية للمتجر.</p></details>
+    <details><summary>ما هي القهوة المختصة؟</summary><p>هي قهوة عالية الجودة تُزرع وتُحصد بعناية، وتحصل على تقييم 80 نقطة أو أكثر من 100 حسب معايير الجودة العالمية، فتعطي نكهات مميزة وواضحة.</p></details>
+    <details><summary>كيف أختار القهوة المناسبة لي؟</summary><p>إذا كنت تحب الشوكولاتة والمكسرات فاختر تحميصاً متوسطاً، وإذا كنت تحب الفواكه والزهور فاختر تحميصاً فاتحاً. للإسبريسو يكون التحميص من متوسط إلى غامق.</p></details>
+    <details><summary>كيف أعرف درجة الطحن المناسبة؟</summary><p>راجع جدول دليل التحضير. الطحن الناعم جداً للإسبريسو، والخشن للفرنش برس.</p></details>
+    <details><summary>متى تكون القهوة في أفضل حالاتها؟</summary><p>غالباً بين 7 و21 يوماً بعد التحميص، حسب نوع البن وطريقة التحضير.</p></details>
+  </div>
+</section>
+
+<section class="sec wrap" id="contact" style="padding-top:0">
+    <p style="text-align:center;margin:0 0 18px"><a href="https://www.tiktok.com/@nzuri.sa" target="_blank" rel="noopener" style="color:var(--accent);font-weight:700">TikTok · @nzuri.sa</a></p>
+  <div class="sec-head">
+    <div>
+      <div class="eyebrow">تواصل معنا</div>
+      <h2 class="display">نسعد بخدمتك</h2>
+    </div>
+  </div>
+  <div class="contact">
+    <div class="c-card">
+      <h3>بيانات التواصل</h3>
+      <div class="c-row"><span>واتساب</span><bdi>+966 54 900 9413</bdi></div>
+      <div class="c-row"><span>هاتف</span><bdi>+966 54 900 9413</bdi></div>
+      <div class="c-row"><span>البريد</span><bdi>nzuri.roastery@gmail.com</bdi></div>
+      <div class="c-row"><span>السجل التجاري</span><bdi>7054900928</bdi></div>
+      <div class="c-row" style="align-items:center"><span>المملكة العربية السعودية</span><img src="img/saudi-emblem.webp" alt="شعار المملكة العربية السعودية" width="40" height="40" style="border-radius:6px;flex:none;object-fit:contain"></div>
+      <div class="c-links">
+        <a class="wa-big" href="https://wa.me/966549009413" target="_blank" rel="noopener">راسلنا على واتساب</a>
+        <button class="copy" data-copy="nzuri.roastery@gmail.com">نسخ البريد</button>
+      </div>
+    </div>
+    <div class="policy">
+      <a href="https://nzuri-sa.com/ar/redirect/pages/1735392813" target="_blank" rel="noopener">سياسة الاستبدال والاسترجاع</a>
+      <a href="https://nzuri-sa.com/ar/redirect/pages/1000714275" target="_blank" rel="noopener">الشحن والتوصيل</a>
+      <a href="https://nzuri-sa.com/ar/redirect/pages/1654140281" target="_blank" rel="noopener">سياسة الاستخدام والخصوصية</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <h4>نزوري | nzuri</h4>
+        <p>محمصة نزوري · قهوة مختصة ومحاصيل فاخرة.</p>
+        <p style="font-size:14px">السجل التجاري: 7054900928</p>
+      </div>
+      <div>
+        <h4>تواصل معنا</h4>
+        <ul>
+          <li><span dir="ltr">+966 54 900 9413</span></li>
+          <li><span>nzuri.roastery@gmail.com</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4>المتجر</h4>
+        <ul>
+          <li><a href="#origins">أصول القهوة</a></li>
+          <li><a href="#shop">المنتجات</a></li>
+          <li><a href="#guide">دليل التحضير</a></li>
+          <li><a href="#faq">الأسئلة الشائعة</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>CRAFTED FOR COFFEE</span>
+      <span>تصور مقترح بالبيانات الحقيقية للمتجر الحالي</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa" href="https://wa.me/966549009413" target="_blank" rel="noopener">واتساب</a>
+
+<div class="scrim" id="scrim"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-modal="true" aria-label="سلة المشتريات">
+  <header><h3>السلة</h3><button class="close" id="cartClose" aria-label="إغلاق">✕</button></header>
+  <div class="lines" id="lines"></div>
+  <div class="sum">
+    <div class="tot"><span>الإجمالي</span><span id="total">0 ريال</span></div>
+    <a class="wa-order" id="waOrder" target="_blank" rel="noopener" href="https://wa.me/966549009413">اطلب عبر واتساب</a>
+    <button class="checkout" disabled>الدفع غير مفعّل في هذا التصور</button>
+    <p class="disclaimer">نسخة عرض فقط. في التنفيذ الفعلي يُربط الدفع بمنصة المتجر.</p>
+  </div>
+</aside>
+<div class="toast" id="toast" role="status" aria-live="polite">أُضيف إلى السلة</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+document.documentElement.setAttribute('lang','ar');
+document.documentElement.setAttribute('dir','rtl');
+const origins = [
+  { id: 'colombia', img: 'img/fd2cc5242b8a.webp', country: 'كولومبيا', name: 'كالداس', price: 59, process: 'مجفف · مخمر', roast: 'متوسط', notes: ['مانغو', 'فراولة', 'كراميل', 'شوكولاتة'], href: 'https://nzuri-sa.com/ar/-/p1979960245', sold: false },
+  { id: 'rwanda', img: 'img/e3312fb6fbaf.webp', country: 'رواندا', name: 'هويا', price: 55, process: 'مغسول', roast: 'متوسط', notes: ['شوكولاتة داكنة', 'لوز', 'عسل الزهور'], href: 'https://nzuri-sa.com/ar/-/p1711117005', sold: false },
+  { id: 'uganda', img: 'img/89b2d0fa6a54.webp', country: 'أوغندا', name: 'جبال رينزوري', price: 56, process: 'مغسول', roast: 'متوسط', notes: ['شوكولاتة', 'بندق', 'حمضيات خفيفة'], href: 'https://nzuri-sa.com/ar/-/p1396036237', sold: false },
+  { id: 'brazil', img: 'img/1a93044bc981.webp', country: 'البرازيل', name: 'مينيرو', price: 69, process: 'مجفف (Natural)', roast: 'متوسط', notes: ['كاكاو', 'بندق', 'كراميل'], href: 'https://nzuri-sa.com/ar/-/p567645420', sold: false },
+  { id: 'ethiopia', img: 'img/a8a0425417fc.webp', country: 'إثيوبيا', name: 'هامبيلا', price: 59, process: 'مجفف (Natural)', roast: 'متوسط', notes: ['برتقال', 'زهور بيضاء', 'عسل', 'شاي أسود'], href: 'https://nzuri-sa.com/ar/-/p94121316', sold: false },
+];
+const products = [
+  { id: 'kwanzaa', img: 'img/b3d6b44156b9.webp', name: 'مجموعة كوانزا للقهوة المختصة', desc: 'مجموعة من نزوري', price: 219, tag: '', tone: '', verified: true },
+  { id: 'mavala', img: 'img/855879e6f56f.webp', name: 'مجموعة ماڤالا', desc: 'مجموعة من نزوري', price: 169, tag: '', tone: 'alt', verified: true },
+  { id: 'server', img: 'img/c4d65b5787ab.webp', name: 'سيرفر مع قمع', desc: 'سيرفر مع قمع', price: 49, tag: '', tone: 'light', verified: true },
+  { id: 'v60', img: 'img/4e9232e91015.webp', name: 'فلتر قهوة CAFEC أبيكا V60 مقاس 02', desc: 'فلتر ورق أبيكا', price: 28, tag: '', tone: 'light', verified: true },
+  { id: 'cup', img: 'img/01dda9072987.webp', name: 'اكواب نزوري Oz 9', desc: 'كوب نزوري', price: 20, tag: '', tone: 'alt', verified: true },
+  { id: 'stickers', img: 'img/e78961a5894a.webp', name: 'استيكرات نزوري', desc: 'استيكرات نزوري', price: 5, tag: '', tone: 'light', verified: true },
+];
+const reviews = [
+  ['أم مبارك الهاجري', 'الله يبارك لكم، تعامل سلس وتوصيل سريع.'],
+  ['Amjd .', 'من أفضل المحامص اللي جربتها. أهنيكم، جمال طعم وجمال بوكس وتعامل.'],
+  ['مجدولين البلعاوي', 'جودة البُن رهيبة! بالذات الإندونيسي، طلبته مرتين وبعتمدكم.'],
+  ['احمد عبدالله', 'تجربة راح تتكرر بإذن الله. عجبني البكج جميل مرة، والمحاصيل موزونة ولذيذة.'],
+  ['ريبما العمري', 'المتجر جميل جداً، أسلوب وذوق وسرعة توصيل. أهنيكم.'],
+  ['ريم القحطاني', 'والله العظيم بدون مبالغة، محاصيل بالدنيا. الله يوفقكم ونشوفكم بالعالم كله.'],
+  ['حمزة ابورحمة', 'أقوى محمصة في 2025.'],
+];
+const cart = {};
+const fmt = n => n.toLocaleString('en-US') + ' ريال';
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+function renderOrigins() {
+  document.getElementById('originList').innerHTML = origins.map(o => `
+    <article class="origin">
+      <div class="img-wrap"><img class="origin-img" src="${o.img}" alt="${esc(o.country)} ${esc(o.name)} من نزوري" loading="lazy">${o.sold ? '<span class="sold-badge">نفدت الكمية</span>' : ''}</div>
+      <span class="country">${esc(o.country)}</span>
+      <h3>${esc(o.name)}</h3>
+      <div class="meta">${esc(o.process)} · تحميص ${esc(o.roast)} · 250 جم</div>
+      <div class="chips">${o.notes.map(n => `<span>${esc(n)}</span>`).join('')}</div>
+      <div class="price" style="${o.sold ? 'opacity:.5' : ''}">${o.price}<small>ريال</small></div>
+      <div class="act">
+        ${o.sold
+          ? `<a class="sold" href="https://wa.me/966549009413?text=${encodeURIComponent('السلام عليكم، أبغى أعرف متى يتوفر محصول ' + o.name + ' (' + o.country + ')')}" target="_blank" rel="noopener">اسأل عن التوفر</a>`
+          : `<button class="add" data-id="${o.id}">أضف للسلة</button>`}
+      </div>
+    </article>`).join('');
+}
+function renderProducts() {
+  document.getElementById('grid').innerHTML = products.filter(p => !p.hidden).map(p => `
+    <article class="card">
+      <div class="pack ${p.tone}">
+        ${p.img ? `<img class="pack-img" src="${p.img}" alt="${esc(p.name)}" loading="lazy">` : ''}${p.svg ? `<div class="pack-svg">${p.svg}</div>` : ''}
+        ${p.tag ? `<span class="tag">${esc(p.tag)}</span>` : ''}
+        <div style="${p.img || p.svg ? 'display:none' : ''}"><h3>${esc(p.name)}</h3><small>NZURI</small></div>
+      </div>
+      <div class="card-body">
+        <h4>${esc(p.name)}</h4>
+        <p>${esc(p.desc)}</p>
+        <div class="price-row">
+          <span class="price">${p.price}<small>ريال</small></span>
+          <button class="add" data-pid="${p.id}">أضف للسلة</button>
+        </div>
+      </div>
+    </article>`).join('');
+}
+function renderReviews() {
+  document.getElementById('reviewList').innerHTML = reviews.map(([who, text]) => `
+    <figure class="review">
+      <span class="stars" aria-label="5 من 5">★★★★★</span>
+      <p>${esc(text)}</p>
+      <figcaption class="who">${esc(who)}</figcaption>
+    </figure>`).join('');
+}
+
+const lookup = id => {
+  const o = origins.find(x => x.id === id);
+  if (o) return { key: id, name: o.name + ' · ' + o.country, price: o.price };
+  const p = products.find(x => x.id === id);
+  return p ? { key: id, name: p.name, price: p.price } : null;
+};
+function renderCart() {
+  const keys = Object.keys(cart);
+  document.getElementById('cartCount').textContent = keys.reduce((s, k) => s + cart[k], 0);
+  var cs = document.getElementById("cartSum"); if (cs) cs.textContent = keys.length ? "· " + keys.reduce((s, k) => s + lookup(k).price * cart[k], 0) + " ر.س" : "";
+  const lines = document.getElementById('lines');
+  if (!keys.length) {
+    lines.innerHTML = '<div class="empty">السلة فارغة. أضف منتجاً من القائمة.</div>';
+  } else {
+    lines.innerHTML = keys.map(k => {
+      const it = lookup(k);
+      return `<div class="line"><div><strong>${esc(it.name)}</strong><div class="qty">الكمية: ${cart[k]}</div></div><strong>${fmt(it.price * cart[k])}</strong></div>`;
+    }).join('');
+  }
+  const total = keys.reduce((s, k) => s + lookup(k).price * cart[k], 0);
+  var wo = document.getElementById("waOrder");
+  if (wo) { var parts = keys.map(function(k){ var it = lookup(k); return "- " + it.name + " × " + cart[k]; }); var msg = "السلام عليكم، أبغى أطلب من نزوري:\n" + parts.join("\n") + "\nالإجمالي: " + total + " ريال"; wo.href = "https://wa.me/966549009413?text=" + encodeURIComponent(msg); }
+  document.getElementById('total').textContent = fmt(total);
+}
+function toggleCart(open) {
+  document.getElementById('drawer').classList.toggle('open', open);
+  document.getElementById('scrim').classList.toggle('open', open);
+  if (open) document.getElementById('cartClose').focus(); else document.getElementById('cartOpen').focus();
+}
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && document.getElementById('drawer').classList.contains('open')) toggleCart(false); });
+let toastTimer;
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove('show'), 1600);
+}
+function addToCart(key) {
+  cart[key] = (cart[key] || 0) + 1;
+  renderCart(); toast('أُضيف إلى السلة');
+}
+
+document.addEventListener('click', e => {
+  const add = e.target.closest('[data-id],[data-pid]');
+  if (add) { addToCart(add.dataset.id || add.dataset.pid); return; }
+  const copy = e.target.closest('[data-copy]');
+  if (copy) {
+    const val = copy.dataset.copy;
+    const done = () => { copy.textContent = 'تم النسخ'; setTimeout(() => copy.textContent = 'نسخ البريد', 1500); };
+    if (navigator.clipboard) navigator.clipboard.writeText(val).then(done).catch(() => { copy.textContent = val; });
+    else copy.textContent = val;
+  }
+});
+document.getElementById('cartOpen').onclick = () => toggleCart(true);
+document.getElementById('cartClose').onclick = () => toggleCart(false);
+document.getElementById('scrim').onclick = () => toggleCart(false);
+window.addEventListener('scroll', () => document.getElementById('top-bar').classList.toggle('scrolled', scrollY > 10), { passive: true });
+
+// 3D tilt on the hero image and on product cards (pointer devices only)
+const canTilt = matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+function tilt(el, max) {
+  el.addEventListener('pointermove', e => {
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+    el.style.transform = `rotateX(${(-y * max).toFixed(2)}deg) rotateY(${(x * max).toFixed(2)}deg) translateZ(0)`;
+  });
+  el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+}
+renderOrigins(); renderProducts(); renderReviews(); renderCart();
+if (canTilt) {
+  tilt(document.getElementById('heroTilt'), 7);
+  document.querySelectorAll('.origin').forEach(el => tilt(el, 5));
+  document.querySelectorAll('.card').forEach(el => tilt(el, 5));
+}
+
+// entrance motion: GSAP if it loaded; otherwise everything stays visible
+if (window.gsap && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.documentElement.classList.add('js');
+  const heroWords = document.querySelectorAll('.hero h1 .w');
+  const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+  tl.from('.hero .eyebrow', { y: 20, opacity: 0, duration: .6 })
+    .from(heroWords, { y: 60, opacity: 0, rotateX: -60, transformOrigin: '50% 100%', stagger: .08, duration: .9 }, '-=.3')
+    .from('.hero p.lead, .hero .btns', { y: 24, opacity: 0, stagger: .12, duration: .7 }, '-=.5')
+    .from('.hero-img', { x: 60, rotateY: -12, opacity: 0, duration: 1.2, ease: 'expo.out' }, '-=1')
+    .from('.float-badge', { scale: .6, opacity: 0, stagger: .15, duration: .7, ease: 'back.out(1.6)' }, '-=.6');
+  if (window.ScrollTrigger) {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.utils.toArray('.sec-head, .origin, .card, .panel, .review, .pillar, .faq details, .c-card, .policy a').forEach((el, i) => {
+      gsap.from(el, { y: 28, duration: .8, ease: 'power3.out', clearProps: 'transform', scrollTrigger: { trigger: el, start: 'top 90%', once: true } });
+    });
+    gsap.to('.marquee-track', { xPercent: -10, ease: 'none', scrollTrigger: { trigger: '.marquee', scrub: true } });
+  }
+}
+</script>
+
+<script>
+(function(){
+  var EN = {
+    "أصول القهوة":"Origins","المنتجات":"Shop","دليل التحضير":"Brew guide","آراء العملاء":"Reviews","تواصل معنا":"Contact","السلة":"Cart",
+    "محمصة نزوري · قهوة مختصة من أصول مختارة":"Nzuri Roastery · Specialty coffee from selected origins",
+    "بن مختص من خمس أصول عالمية، يُحمَّص بحسب نكهة كل صنف، ويُوصَل إلى باب بيتك داخل المملكة.":"Specialty beans from five world origins, roasted to suit each flavour and delivered to your door across the Kingdom.",
+    "استكشف الأصول":"Explore origins","250 جم":"250 g","لكل محصول، تحميص متوسط":"per origin, medium roast",
+    "يوماً بعد التحميص: غالباً ذروة النكهة":"days after roasting: usually peak flavour",
+    "توصيل داخل السعودية":"Delivery across Saudi Arabia","تفاصيل الشحن في صفحة المتجر الرسمية":"Shipping details are on the official store page",
+    "استبدال واسترجاع":"Exchanges & returns","سياسة مكتوبة وواضحة":"Clear written policy",
+    "دفع بعدة طرق":"Multiple payment methods","طرق الدفع تظهر للعميل عند إتمام الطلب في المتجر":"Payment options appear at checkout",
+    "منشأة مسجّلة":"Registered business","السجل التجاري 7054900928":"Commercial registration 7054900928",
+    "اختر المحاصيل":"Choose your origins","خمس نكهات من حول العالم":"Five flavours from around the world",
+    "الأسعار للعبوة 250 جم كما هي في المتجر. اختر حسب ذوقك: شوكولاتة، فواكه، أو زهور.":"Prices per 250 g pack, as listed in the store. Choose by taste: chocolate, fruit, or floral.",
+    "أضف للسلة":"Add to cart","أضف إلى السلة":"Add to cart","أضف البوكس للسلة":"Add box to cart","ريال":"SAR","كل كيس يحكي قصة، وأنت الفصل الجديد فيها.":"Every bag tells a story, and you are the next chapter.","مجفف · مخمر · تحميص متوسط · 250 جم":"Dried · fermented · medium roast · 250 g","مجفف (Natural) · تحميص متوسط · 250 جم":"Natural dried · medium roast · 250 g","مغسول · تحميص متوسط · 250 جم":"Washed · medium roast · 250 g","مانغو":"Mango","فراولة":"Strawberry","كراميل":"Caramel","شوكولاتة":"Chocolate","شوكولاتة داكنة":"Dark chocolate","لوز":"Almond","عسل الزهور":"Floral honey","بندق":"Hazelnut","حمضيات خفيفة":"Light citrus","كاكاو":"Cacao","برتقال":"Orange","زهور بيضاء":"White flowers","عسل":"Honey","شاي أسود":"Black tea","كيمكس":"Chemex","أيام":"Days","يوماً · الذروة":"days · peak","يوماً":"days","السجل التجاري":"Commercial registration","عرض اليوم الوطني 96":"National Day offer","بوكس عزّنا بمجدنا":"Our Pride box","ثلاثة محاصيل من نزوري في بوكس واحد، تختارها بنفسك وتعيشها بكل رشفة.":"Three Nzuri origins in one box, chosen by you.","ريال · فقط":"SAR only",
+    "كولومبيا":"Colombia","كالداس":"Caldas","رواندا":"Rwanda","هويا":"Huye","أوغندا":"Uganda","جبال رينزوري":"Rwenzori",
+    "البرازيل":"Brazil","مينيرو":"Mineiro","إثيوبيا":"Ethiopia","هامبيلا":"Hambela",
+    "كولومبيا كالداس":"Colombia Caldas","رواندا هويا":"Rwanda Huye","أوغندا جبال رينزوري":"Uganda Rwenzori","مينيرو البرازيلية":"Brazil Mineiro","إثيوبيا هامبيلا":"Ethiopia Hambela",
+    "حالة التوفر تعكس وضع المتجر وقت إعداد هذا التصور، وقد تتغير.":"Availability reflects the store at the time this concept was prepared, and may change.",
+    "المتجر":"The shop","مجموعات ومستلزمات":"Collections & gear","أسعار بالريال السعودي كما هي في المتجر الحالي.":"Prices in Saudi riyals, as currently listed in the store.",
+    "مجموعة كوانزا للقهوة المختصة":"Kwanzaa specialty coffee collection","مجموعة من نزوري":"A Nzuri collection","مجموعة ماڤالا":"Mavala collection",
+    "سيرفر مع قمع":"Server with dripper","فلتر قهوة CAFEC أبيكا V60 مقاس 02":"CAFEC Abaca V60 coffee filters, size 02","فلتر ورق أبيكا":"Abaca paper filters",
+    "اكواب نزوري Oz 9":"Nzuri 9 oz cups","كوب نزوري":"Nzuri cup","استيكرات نزوري":"Nzuri stickers",
+    "صور المنتجات مأخوذة من صفحات المتجر الفعلية.":"Product photos are taken from the live store pages.",
+    "التحميص والطحن الصحيح":"Roast & grind guide","من دليل نزوري الحالي، لتحصل على كوب متوازن في كل مرة.":"From the Nzuri guide, for a balanced cup every time.",
+    "التحميص حسب النكهة":"Roast by flavour","النكهة المطلوبة":"Flavour profile","التحميص المناسب":"Suitable roast",
+    "شوكولاتة ومكسرات":"Chocolate & nuts","متوسط":"Medium","فواكه وزهور":"Fruit & florals","فاتح":"Light",
+    "إسبريسو":"Espresso","متوسط إلى غامق":"Medium-dark","V60 أو الترشيح":"V60 or filter","فاتح أو متوسط":"Light or medium",
+    "درجة الطحن حسب الطريقة":"Grind size by method","طريقة التحضير":"Brew method","درجة الطحن":"Grind","متوسطة":"Medium",
+    "متوسطة إلى خشنة":"Medium-coarse","فرنش برس":"French press","خشنة":"Coarse","موكا بوت":"Moka pot","ناعمة":"Fine","ناعمة جداً":"Extra fine",
+    "متى تكون القهوة في أفضل حالاتها؟":"When is coffee at its best?",
+    "غالباً بين 7 و21 يوماً بعد التحميص، وذلك حسب نوع البن وطريقة التحضير.":"Usually 7 to 21 days after roasting, depending on the bean and the brew method.",
+    "الطعم الذي نوصله إليك لا يأتي بالصدفة.":"The flavour we deliver isn't left to chance.",
+    "الانتقاء":"Selection","انتقاء استثنائي":"Exceptional selection","نختار البن الذي يستحق فعلاً، لا أي محصول.":"We pick beans that truly earn their place, not just any origin.",
+    "الجودة":"Quality","جودة بلا تنازل":"Quality without compromise","نختار كل محصول بعناية قبل أن يصل إليك.":"We choose every origin with care before it reaches you.",
+    "التجربة":"Experience","تجربة متكاملة":"A complete experience","نهتم أن تصلك القهوة بأفضل حال.":"We care that your coffee arrives in its best condition.",
+    "ماذا قال عملاؤنا":"What our customers say","آراء منشورة من عملاء المتجر، 7 آراء":"Published reviews from store customers (7 reviews)",
+    "من طلبات عملائنا":"From our customers","صور حقيقية من المتجر":"Real photos from the store",
+    "صور أرسلها عملاء نزوري ومنشورة على الصفحة الرئيسية للمتجر.":"Photos shared by Nzuri customers and published on the store homepage.",
+    "الأسئلة الشائعة":"FAQ","كل ما تحتاج معرفته":"Everything you need to know",
+    "ما مدة توصيل الطلبات؟":"How long does delivery take?",
+    "تفاصيل الشحن والتوصيل والمدد متاحة في صفحة الشحن والتوصيل الرسمية للمتجر.":"Shipping details and timelines are on the store's official shipping page.",
+    "ما هي القهوة المختصة؟":"What is specialty coffee?","كيف أختار القهوة المناسبة لي؟":"How do I choose the right coffee?","كيف أعرف درجة الطحن المناسبة؟":"How do I know the right grind?",
+    "راجع جدول دليل التحضير. الطحن الناعم جداً للإسبريسو، والخشن للفرنش برس.":"See the brew guide. Extra fine for espresso, coarse for French press.",
+    "نسعد بخدمتك":"We're happy to help","بيانات التواصل":"Contact details","واتساب":"WhatsApp","هاتف":"Phone","البريد":"Email",
+    "راسلنا على واتساب":"Message us on WhatsApp","نسخ البريد":"Copy email",
+    "سياسة الاستبدال والاسترجاع":"Exchange & return policy","الشحن والتوصيل":"Shipping & delivery","سياسة الاستخدام والخصوصية":"Terms & privacy",
+    "محمصة نزوري · قهوة مختصة ومحاصيل فاخرة.":"Nzuri Roastery · Specialty coffee and premium origins.",
+    "السجل التجاري: 7054900928":"Commercial registration: 7054900928",
+    "تصور مقترح بالبيانات الحقيقية للمتجر الحالي":"Concept proposal using the store's real data",
+    "السلة فارغة. أضف منتجاً من القائمة.":"Your cart is empty. Add a product from the list.",
+    "الإجمالي":"Total","الدفع غير مفعّل في هذا التصور":"Checkout is disabled in this concept",
+    "نسخة عرض فقط. في التنفيذ الفعلي يُربط الدفع بمنصة المتجر.":"View-only version. In production, checkout connects to the store platform.",
+    "أُضيف إلى السلة":"Added to cart","الإجمالي ":"Total ",
+    "ريال ":"SAR ","ريال":"SAR","عرض كل":"View all","استكشف":"Explore",
+    "رئيسية":"Home","الرئيسية":"Home","سلة التسوق":"Cart",
+  }
+  var HERO_EN = '<span class="w">Roasted</span> <span class="w">with</span> <span class="w">care,</span><br><em>delivered at its best.</em>';
+  var HERO_AR = null;
+  var ORIG = new Map();
+  var lang = 'ar';
+  function walk(root, fn){
+    var w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    var n; var list = [];
+    while ((n = w.nextNode())) { if (!n.parentElement || n.parentElement.closest('script,style,#langBtn')) continue; list.push(n); }
+    list.forEach(fn);
+  }
+  function setLang(next){
+    var cur = lang; lang = next;
+    var root = document.documentElement;
+    root.lang = next === 'en' ? 'en' : 'ar';
+    root.dir = next === 'en' ? 'ltr' : 'rtl';
+    root.classList.toggle('en', next === 'en');
+    document.getElementById('langBtn').textContent = next === 'en' ? 'عربي' : 'EN';
+    walk(document.body, function(n){
+      var raw = n.textContent; var s = raw.trim();
+      if (next === 'en') {
+        if (EN.hasOwnProperty(s)) { if (!ORIG.has(n)) ORIG.set(n, raw); n.textContent = raw.replace(s, EN[s]); }
+      } else if (ORIG.has(n)) { n.textContent = ORIG.get(n); ORIG.delete(n); }
+    });
+    var h1 = document.querySelector('.hero h1');
+    if (h1) {
+      if (next === 'en') { if (HERO_AR === null) HERO_AR = h1.innerHTML; h1.innerHTML = HERO_EN; }
+      else if (HERO_AR !== null) { h1.innerHTML = HERO_AR; }
+    }
+    var ms = document.querySelector('.marquee-track');
+  }
+  function init(){
+    var b = document.getElementById('langBtn');
+    if (!b) return;
+    b.addEventListener('click', function(){ setLang(lang === 'ar' ? 'en' : 'ar'); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
+})();
+</script>
+</body>
+<script>
+(function(){
+  function boot(){
+    if (!window.gsap) return;
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) return;
+    if (window.ScrollTrigger) gsap.registerPlugin(ScrollTrigger);
+    gsap.to('.hero-img img', { yPercent: 8, scale: 1.08, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+    gsap.to('.fb1', { y: -10, duration: 2.6, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+    gsap.to('.fb2', { y: 10, duration: 3.1, repeat: -1, yoyo: true, ease: 'sine.inOut' });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else window.addEventListener('load', boot);
+})();
+</script>
+
+</body></html>

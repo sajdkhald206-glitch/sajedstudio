@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>بيت حانون تنهض</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lalezar&family=Reem+Kufi:wght@500;700&family=Changa:wght@400;600&family=Aref+Ruqaa:wght@700&display=swap" rel="stylesheet">
+<style>
+/* VOICE وثيقة تخطيط رسمية بروح أمل، لأهل المدينة والمانحين
+   IDEA ملصق مخطط بلدي مطبوع: لوحة المهندس + بستان البرتقال
+   PICTURE مشهد بطل لأفق بيت حانون الجديد بين البساتين والوادي، ثم مخطط عمراني كبير
+   COLOUR أبيض، أخضر حمضيات عميق، برتقالي البرتقال، بني التراب
+   TYPE Lalezar للعناوين، Reem Kufi للفرعية، Changa للنص، Aref Ruqaa للرؤية
+   LAYOUT عنوان فوق مشهد عريض، ثم أرقام، ثم أقسام بعرض كامل؛ عمود واحد على الهاتف */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#0f1a14);--ink:light-dark(#14201a,#eef3ee);--soft:light-dark(#4b5a51,#b6c4ba);--green:light-dark(#1f5c3a,#5fb784);--green2:light-dark(#e6f1ea,#16291e);--orange:light-dark(#e8740c,#ff9a3c);--earth:light-dark(#7a5230,#c49a6c);--sand:light-dark(#f6efe6,#1d1712);--line:light-dark(#d9e2dc,#2a3a30)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+html{scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.7 'Changa',Tahoma,sans-serif;overflow-x:clip}
+h1,h2{font-family:'Lalezar','Changa',sans-serif;font-weight:400;line-height:1.1;margin:0 0 .4em;text-wrap:balance}
+h1{font-size:clamp(44px,8vw,84px);color:var(--green)}
+h2{font-size:clamp(32px,4.5vw,48px);color:var(--green)}
+h3{font-family:'Reem Kufi','Changa',sans-serif;font-weight:700;font-size:21px;margin:0 0 .3em}
+p{margin:0 0 .8em;max-width:68ch}
+a{color:var(--green)}
+.band{padding:clamp(28px,4vw,64px) max(5vw,16px)}
+.wrap{max-width:1240px;margin:0 auto}
+.nav{position:sticky;top:0;z-index:5;background:var(--green);display:flex;gap:6px;overflow-x:auto;padding:8px max(5vw,16px)}
+.nav a{flex:none;color:#fff;text-decoration:none;font-family:'Reem Kufi',sans-serif;padding:8px 12px;border-radius:8px;min-height:44px;display:flex;align-items:center}
+.nav a:hover,.nav a:focus-visible{background:rgba(255,255,255,.16);outline:none}
+.hero{background:var(--sand);padding-bottom:0}
+.vision{font-family:'Aref Ruqaa',serif;font-size:clamp(24px,3.4vw,38px);color:var(--earth);line-height:1.5;margin:0 0 .6em}
+.lead{font-size:19px;color:var(--soft)}
+.scene{display:block;width:100%;height:auto;margin-top:12px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(10em,1fr));gap:2px;background:var(--line);border-block:2px solid var(--line)}
+.stat{background:var(--bg);padding:20px 16px}
+.stat b{display:block;font-family:'Lalezar',sans-serif;font-weight:400;font-size:clamp(34px,4vw,46px);color:var(--orange);line-height:1.1;white-space:nowrap}
+.stat span{color:var(--soft);font-size:15px}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:start}
+.green{background:var(--green2)}
+.panel{border:1px solid var(--line);border-radius:14px;padding:18px;background:var(--bg)}
+.ba{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.ba figure{margin:0}.ba svg{width:100%;height:auto;border-radius:12px;display:block}
+.ba figcaption{font-family:'Reem Kufi',sans-serif;font-weight:700;margin-top:6px}
+.phases{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;counter-reset:p}
+.phase{border-top:8px solid var(--green);background:var(--bg);border-radius:12px;padding:18px}
+.phase:nth-child(2){border-color:var(--orange)}.phase:nth-child(3){border-color:var(--earth)}
+.phase .when{font-family:'Lalezar',sans-serif;font-size:28px;color:var(--orange);white-space:nowrap}
+.phase ul{padding-inline-start:1.1em;margin:.4em 0 0}
+.phase li{margin-bottom:.3em}
+.mapbox{overflow-x:auto;border-radius:14px}
+.mapbox svg{display:block;width:100%;min-width:640px;height:auto}
+.legend{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:12px;font-size:15px;color:var(--soft)}
+.legend i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-inline-end:6px}
+.scroll{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:16px}
+th{font-family:'Reem Kufi',sans-serif;text-align:start;border-bottom:2px solid var(--green);padding:10px 8px}
+td{border-bottom:1px solid var(--line);padding:10px 8px;vertical-align:top}
+td:first-child{font-family:'Reem Kufi',sans-serif;font-weight:700;color:var(--green);white-space:nowrap}
+.bars{display:grid;gap:10px}
+.bar{display:grid;grid-template-columns:minmax(8em,13em) minmax(0,1fr) 5.5em;gap:12px;align-items:center}
+.bar .t{background:var(--green2);border-radius:6px;height:26px;overflow:hidden}
+.bar .f{height:100%;background:var(--green);border-radius:6px}
+.bar:first-child .f{background:var(--orange)}
+.bar .v{font-family:'Reem Kufi',sans-serif;font-weight:700;white-space:nowrap;text-align:left;direction:ltr}
+.total{font-family:'Lalezar',sans-serif;font-size:34px;color:var(--orange)}
+.tl{display:grid;gap:8px}
+.tlr{display:grid;grid-template-columns:minmax(8em,12em) minmax(0,1fr);gap:12px;align-items:center}
+.track{position:relative;height:28px;background:var(--green2);border-radius:6px}
+.seg{position:absolute;top:0;bottom:0;border-radius:6px;background:var(--green);color:#fff;font-size:13px;display:flex;align-items:center;padding:0 8px;white-space:nowrap;overflow:hidden}
+.axis{display:grid;grid-template-columns:minmax(8em,12em) minmax(0,1fr);gap:12px;font-size:13px;color:var(--soft)}
+.ticks{display:flex;justify-content:space-between}
+.risks{display:grid;grid-template-columns:repeat(auto-fit,minmax(16em,1fr));gap:14px}
+.risk{border-inline-start:6px solid var(--orange);background:var(--bg);padding:14px 16px;border-radius:10px}
+.note{font-size:14px;color:var(--soft)}
+footer{background:var(--green);color:#fff}
+footer a{color:#fff}
+footer ol{padding-inline-start:1.2em;margin:0}
+footer li{margin-bottom:.4em;overflow-wrap:anywhere}
+@media(max-width:820px){.two,.ba{grid-template-columns:minmax(0,1fr)}.phases{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:600px){table{font-size:14px}.stack thead{display:none}.stack tr{display:grid;padding-block:10px;border-bottom:1px solid var(--line)}.stack td{display:block;border:0;padding:3px 0}.stack td::before{content:attr(data-l)'：';color:var(--soft);font-size:13px;display:block}.bar{grid-template-columns:minmax(0,1fr) 5em}.bar .n{grid-column:1/-1}.tlr,.axis{grid-template-columns:minmax(0,1fr)}.axis>span:first-child{display:none}}
+@media(prefers-reduced-motion:no-preference){.sun{animation:rise 3s ease-out both}@keyframes rise{from{transform:translateY(40px);opacity:.3}to{transform:none;opacity:1}}}
+</style>
+<script>new MutationObserver(()=>{for(const c of document.querySelectorAll('.stack td:not([data-l])')){let i=0,p=c;while(p=p.previousElementSibling)i+=p.colSpan;c.dataset.l=c.closest('table').rows[0].cells[i]?.textContent||''}}).observe(document,{childList:true,subtree:true})</script>
+</head>
+<body>
+<nav class="nav" aria-label="أقسام الخطة">
+<a href="#vision">الرؤية</a><a href="#now">الوضع الراهن</a><a href="#phases">المراحل</a><a href="#plan">المخطط</a><a href="#sectors">القطاعات</a><a href="#budget">الميزانية</a><a href="#time">الجدول الزمني</a><a href="#risks">المخاطر</a><a href="#sources">المصادر</a>
+</nav>
+
+<header class="band hero" id="vision">
+<div class="wrap">
+<h1>بيت حانون تنهض</h1>
+<p class="vision">بيت حانون 2033: مدينة زراعية خضراء آمنة، بوابة غزة الشمالية وسلّتها الغذائية</p>
+<p class="lead">خطة تعافٍ وإعمار تعيد نحو 62 ألف نسمة إلى مدينتهم خلال 7 سنوات، بكلفة تقديرية 2.3 مليار دولار، ويبقى الناس على أرضهم طوال العمل.</p>
+</div>
+<svg class="scene" viewBox="0 0 1200 420" preserveAspectRatio="xMidYMax slice" role="img" aria-label="مشهد تخيلي لبيت حانون الجديدة بين بساتين البرتقال ووادي حانون">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd9a8"/><stop offset="1" stop-color="#fff4e3"/></linearGradient>
+<linearGradient id="wadi" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#5fa7c9"/><stop offset="1" stop-color="#9fd0e3"/></linearGradient>
+<g id="tree"><rect x="-3" y="0" width="6" height="18" fill="#6b4426"/><circle r="17" cy="-6" fill="#2f7a4c"/><circle r="17" cx="-5" cy="-10" fill="#3f9460"/><circle r="2.8" cx="-7" cy="-4" fill="#f28a1c"/><circle r="2.8" cx="6" cy="-12" fill="#f28a1c"/><circle r="2.8" cx="4" cy="2" fill="#f28a1c"/><circle r="2.8" cx="-10" cy="-15" fill="#f28a1c"/></g>
+<g id="bld"><rect width="70" height="110" fill="#f3ead9"/><rect x="70" width="22" height="110" fill="#d9c6a6"/><rect y="-6" width="96" height="8" fill="#1f5c3a"/><rect x="8" y="-4" width="56" height="4" fill="#2b5f86"/></g>
+<g id="win"><rect width="10" height="14" fill="#7a5230" opacity=".55"/></g>
+</defs>
+<rect width="1200" height="420" fill="url(#sky)"/>
+<circle class="sun" cx="900" cy="120" r="62" fill="#ffb347"/>
+<path d="M0 300 Q300 250 600 285 T1200 270 V420 H0Z" fill="#c9b48e" opacity=".55"/>
+<g transform="translate(330 175)"><use href="#bld"/><use href="#win" x="12" y="18"/><use href="#win" x="36" y="18"/><use href="#win" x="12" y="50"/><use href="#win" x="36" y="50"/><use href="#win" x="12" y="82"/><use href="#win" x="36" y="82"/></g>
+<g transform="translate(445 150)"><use href="#bld" transform="scale(1 1.25)"/><use href="#win" x="12" y="20"/><use href="#win" x="36" y="20"/><use href="#win" x="12" y="56"/><use href="#win" x="36" y="56"/><use href="#win" x="12" y="92"/><use href="#win" x="36" y="92"/></g>
+<g transform="translate(560 190)"><use href="#bld"/><use href="#win" x="12" y="18"/><use href="#win" x="36" y="18"/><use href="#win" x="12" y="50"/><use href="#win" x="36" y="50"/></g>
+<g transform="translate(675 160)"><rect width="110" height="135" fill="#efe3cc"/><rect x="110" width="24" height="135" fill="#d4bf9b"/><path d="M15 0 Q55 -60 95 0Z" fill="#1f5c3a"/><rect x="50" y="-90" width="10" height="60" fill="#e8d9bd"/><rect x="40" y="70" width="30" height="65" rx="15" fill="#7a5230" opacity=".7"/></g>
+<g transform="translate(810 200)"><use href="#bld"/><use href="#win" x="12" y="18"/><use href="#win" x="36" y="18"/><use href="#win" x="12" y="50"/><use href="#win" x="36" y="50"/></g>
+<g fill="#1f5c3a" opacity=".9"><rect x="340" y="166" width="70" height="6" transform="skewX(-30)"/><rect x="860" y="190" width="70" height="6"/></g>
+<path d="M1200 330 C1000 300 900 360 700 345 S350 380 0 360 V420 H1200Z" fill="url(#wadi)"/>
+<path d="M0 380 Q600 350 1200 375 V420 H0Z" fill="#2a6b45"/>
+<g id="rowA"></g>
+</svg>
+</header>
+
+<section class="stats" aria-label="أرقام أساسية">
+<div class="stat"><b>52,237</b><span>نسمة قبل الحرب (تعداد 2017)</span></div>
+<div class="stat"><b>12.5 كم²</b><span>مساحة المدينة، 45% منها زراعية</span></div>
+<div class="stat"><b>11,000</b><span>وحدة سكنية دائمة جديدة</span></div>
+<div class="stat"><b>5,000 دونم</b><span>أرض زراعية تعود للإنتاج</span></div>
+<div class="stat"><b>8,000</b><span>فرصة عمل خلال الإعمار</span></div>
+<div class="stat"><b>2.3 مليار $</b><span>كلفة تقديرية على 7 سنوات</span></div>
+</section>
+
+<section class="band" id="now">
+<div class="wrap two">
+<div>
+<h2>مدينة تُعاد من الصفر</h2>
+<p>بيت حانون خالية من سكانها تقريباً منذ أواخر 2023، ومعظم مبانيها مسوّاة بالأرض، وهي اليوم داخل المنطقة التي يسيطر عليها الجيش الإسرائيلي شرق «الخط الأصفر».</p>
+<p>بين أكتوبر 2025 ويناير 2026 أزالت الجرّافات نحو 408 آلاف م² من الأرض، شملت بقايا 329 منزلاً على الأقل ومواقع زراعية.</p>
+<p><b>شرطان قبل أي بدء:</b> وقف نار دائم، وانسحاب كامل يتيح عودة الأهالي. لا توجد شبكات قائمة نرمّمها، بل أرض شبه فارغة: عبء ضخم، وفرصة لمدينة أفضل مما كانت.</p>
+</div>
+<div class="ba">
+<figure>
+<svg viewBox="0 0 300 220" role="img" aria-label="اليوم: ركام وأرض مجرّفة">
+<rect width="300" height="220" fill="#d8cbb8"/><rect y="150" width="300" height="70" fill="#a98e6c"/>
+<g fill="#8f7b63"><path d="M20 150 L60 110 L95 150Z"/><path d="M90 150 L120 125 L170 150Z"/><path d="M180 150 L215 100 L260 150Z"/></g>
+<g fill="#6f5f4c"><rect x="200" y="90" width="18" height="60"/><rect x="40" y="120" width="12" height="30"/></g>
+<g stroke="#7a6a55" stroke-width="3"><line x1="10" y1="175" x2="290" y2="175"/><line x1="10" y1="195" x2="290" y2="195"/></g>
+</svg>
+<figcaption>اليوم: ركام وأرض مجرّفة</figcaption>
+</figure>
+<figure>
+<svg viewBox="0 0 300 220" role="img" aria-label="2033: حي أخضر وبساتين">
+<rect width="300" height="220" fill="#fff1dc"/><circle cx="240" cy="50" r="26" fill="#ffb347"/>
+<rect x="40" y="70" width="60" height="85" fill="#f3ead9"/><rect x="100" y="70" width="16" height="85" fill="#d9c6a6"/><rect x="36" y="64" width="84" height="7" fill="#1f5c3a"/>
+<rect x="140" y="90" width="55" height="65" fill="#efe3cc"/><rect x="195" y="90" width="14" height="65" fill="#d4bf9b"/>
+<rect y="155" width="300" height="65" fill="#2a6b45"/><path d="M0 185 Q150 170 300 190 V200 Q150 182 0 196Z" fill="#7fbfd8"/>
+<g><use href="#tree" x="30" y="150"/><use href="#tree" x="125" y="150"/><use href="#tree" x="235" y="150"/><use href="#tree" x="275" y="152"/></g>
+</svg>
+<figcaption>2033: حي أخضر وبساتين</figcaption>
+</figure>
+</div>
+</div>
+</section>
+
+<section class="band green" id="phases">
+<div class="wrap">
+<h2>ثلاث مراحل، والناس على أرضهم</h2>
+<div class="phases">
+<article class="phase"><div class="when">0–6 أشهر</div><h3>الإغاثة والتعافي العاجل</h3>
+<ul><li>مسح الذخائر مع UNMAS وتقسيم المدينة إلى مربعات: أحمر، أصفر، أخضر</li><li>انتشال الشهداء من تحت الركام بكرامة</li><li>مياه 50 لتراً للفرد يومياً ونقاط توزيع كل 300 م</li><li>مستشفى ميداني 50 سريراً وأربع نقاط رعاية متنقلة</li><li>وحدات سكن مؤقتة معزولة قرب أراضي العائلات</li><li>كسّارة ركام بطاقة 1,000 طن يومياً، و2,000 شاب في «النقد مقابل العمل»</li></ul></article>
+<article class="phase"><div class="when">6–24 شهراً</div><h3>التعافي المبكر</h3>
+<ul><li>10,500 وحدة انتقالية في 8 تجمعات مرتبطة بالأحياء</li><li>آبار بلدية وخزان مركزي، ومحطات شمسية صغيرة لكل تجمع</li><li>12 مدرسة مؤقتة ومركزان صحيان ومركز أطراف وتأهيل</li><li>فحص التربة وزراعة الخضار أولاً، وأول 2,000 دونم</li><li>منح لـ1,000 مشروع صغير ومركز تدريب مهني</li><li>اعتماد المخطط الهيكلي الجديد بالشهر 18</li></ul></article>
+<article class="phase"><div class="when">السنة 2–7</div><h3>الإعمار الشامل</h3>
+<ul><li>11,000 وحدة دائمة، نحو 2,000 كل سنة</li><li>شبكات مياه وصرف كاملة و100 لتر للفرد</li><li>مستشفى بيت حانون الجديد و14 مدرسة دائمة</li><li>إعادة بناء المسجد العمري والسوق القديم</li><li>متنزه وادي حانون ومزرعة شمسية شرقية</li><li>منطقة صناعات غذائية: تبريد وتعبئة وتصنيع</li></ul></article>
+</div>
+</div>
+</section>
+
+<section class="band" id="plan">
+<div class="wrap">
+<h2>المخطط: مدينة مدمجة يحيط بها حزام أخضر</h2>
+<p>بدل الامتداد العشوائي الذي أكل الأرض الزراعية، نبني نواة عمرانية بارتفاع 4–6 طوابق، فتتسع الأرض للبساتين والحدائق. كل بيت على بُعد 10 دقائق مشياً من مدرسة وعيادة وحديقة.</p>
+<div class="mapbox">
+<svg viewBox="0 0 1000 560" role="img" aria-label="مخطط مفاهيمي لبيت حانون الجديدة" font-family="Changa, sans-serif">
+<rect width="1000" height="560" fill="var(--sand)"/>
+<line x1="20" y1="34" x2="980" y2="34" stroke="var(--earth)" stroke-width="2" stroke-dasharray="10 6"/>
+<text x="980" y="24" text-anchor="end" font-size="15" fill="var(--soft)">الحدود الشمالية الشرقية · الشمال للأعلى · رسم غير مقيس</text>
+<rect x="20" y="46" width="200" height="320" rx="14" fill="#3f9460" opacity=".22" stroke="#2f7a4c" stroke-width="2"/>
+<g transform="translate(60 250)"><use href="#tree"/><use href="#tree" x="50"/><use href="#tree" x="100"/><use href="#tree" x="25" y="50"/><use href="#tree" x="75" y="50"/></g>
+<text x="120" y="96" text-anchor="middle" font-family="Reem Kufi" font-weight="700" font-size="22" fill="var(--green)">حزام زراعي</text>
+<text x="120" y="126" text-anchor="middle" font-size="16" fill="var(--ink)">حمضيات وخضار</text>
+<text x="120" y="150" text-anchor="middle" font-size="16" fill="var(--ink)">وبيوت محمية</text>
+<rect x="20" y="380" width="200" height="160" rx="14" fill="#e8740c" opacity=".18" stroke="#e8740c" stroke-width="2"/>
+<text x="120" y="440" text-anchor="middle" font-family="Reem Kufi" font-weight="700" font-size="21" fill="var(--earth)">صناعات غذائية</text>
+<text x="120" y="470" text-anchor="middle" font-size="16" fill="var(--ink)">تبريد وتعبئة</text>
+<text x="120" y="494" text-anchor="middle" font-size="16" fill="var(--ink)">وتصنيع زراعي</text>
+<rect x="240" y="60" width="460" height="400" rx="16" fill="var(--bg)" stroke="var(--earth)" stroke-width="2"/>
+<text x="470" y="88" text-anchor="middle" font-size="15" fill="var(--soft)">النواة العمرانية</text>
+<g font-size="15"><rect x="258" y="100" width="206" height="90" rx="10" fill="none" stroke="var(--line)" stroke-width="2"/><text x="361" y="140" text-anchor="middle" font-family="Reem Kufi" font-weight="700" font-size="19" fill="var(--ink)">حي سكني شمالي</text><text x="361" y="166" text-anchor="middle" fill="var(--soft)">مبانٍ 4 إلى 6 طوابق</text>
+<rect x="476" y="100" width="206" height="90" rx="10" fill="none" stroke="var(--line)" stroke-width="2"/><text x="579" y="140" text-anchor="middle" font-family="Reem Kufi" font-weight="700" font-size="19" fill="var(--ink)">حي سكني شرقي</text><text x="579" y="166" text-anchor="middle" fill="var(--soft)">مطل على المتنزه</text>
+<rect x="258" y="204" width="424" height="120" rx="12" fill="#e8740c" opacity=".16" stroke="#e8740c" stroke-width="3"/><text x="470" y="248" text-anchor="middle" font-family="Lalezar" font-size="28" fill="var(--earth)">قلب المدينة التاريخي</text><text x="470" y="280" text-anchor="middle" font-size="17" fill="var(--ink)">المسجد العمري والسوق المسقوف</text><text x="470" y="304" text-anchor="middle" font-size="17" fill="var(--ink)">ساحة عامة ونصب للذاكرة</text>
+<rect x="258" y="338" width="206" height="106" rx="10" fill="none" stroke="var(--line)" stroke-width="2"/><text x="361" y="378" text-anchor="middle" font-family="Reem Kufi" font-weight="700" font-size="19" fill="var(--ink)">مجمّع الخدمات</text><text x="361" y="404" text-anchor="middle" fill="var(--soft)">مستشفى ومدارس</text><text x="361" y="426" text-anchor="middle" fill="var(--soft)">ومبنى البلدية</text>
+<rect x="476" y="338" width="206" height="106" rx="10" fill="none" stroke="var(--line)" stroke-width="2"/><text x="579" y="378" text-anchor="middle" font-family="Reem Kufi" font-weight="700" font-size="19" fill="var(--ink)">حي سكني جنوبي</text><text x="579" y="404" text-anchor="middle" fill="var(--soft)">سكن للأزواج الشباب</text></g>
+<line x1="240" y1="496" x2="700" y2="496" stroke="var(--earth)" stroke-width="6" stroke-linecap="round"/>
+<text x="470" y="530" text-anchor="middle" font-size="16" fill="var(--soft)">محور النقل: إلى بيت لاهيا وجباليا وغزة</text>
+<path d="M740 46 C700 180 790 300 740 546 L790 546 C840 300 750 180 790 46Z" fill="#5fa7c9" opacity=".45"/>
+<text transform="translate(770 300) rotate(-90)" text-anchor="middle" font-family="Reem Kufi" font-weight="700" font-size="18" fill="var(--ink)">ممر وادي حانون الأخضر</text>
+<rect x="812" y="46" width="168" height="250" rx="14" fill="#3f9460" opacity=".22" stroke="#2f7a4c" stroke-width="2"/>
+<text x="896" y="96" text-anchor="middle" font-family="Reem Kufi" font-weight="700" font-size="22" fill="var(--green)">حزام شرقي</text>
+<text x="896" y="126" text-anchor="middle" font-size="16" fill="var(--ink)">دفيئات وبساتين</text>
+<rect x="812" y="310" width="168" height="230" rx="14" fill="#2b5f86" opacity=".14" stroke="#2b5f86" stroke-width="2"/>
+<g fill="#2b5f86" opacity=".75"><rect x="836" y="410" width="50" height="22" transform="skewX(-20)"/><rect x="900" y="410" width="50" height="22" transform="skewX(-20)"/><rect x="836" y="446" width="50" height="22" transform="skewX(-20)"/><rect x="900" y="446" width="50" height="22" transform="skewX(-20)"/></g>
+<text x="896" y="356" text-anchor="middle" font-family="Reem Kufi" font-weight="700" font-size="21" fill="var(--ink)">مزرعة شمسية</text>
+<text x="896" y="384" text-anchor="middle" font-size="16" fill="var(--soft)">كهرباء الأحياء</text>
+</svg>
+</div>
+<div class="legend"><span><i style="background:#e8740c"></i>القلب التاريخي والصناعات الغذائية</span><span><i style="background:#3f9460"></i>الحزام الزراعي</span><span><i style="background:#5fa7c9"></i>وادي حانون</span><span><i style="background:#2b5f86"></i>الطاقة الشمسية</span></div>
+</div>
+</section>
+
+<section class="band green" id="sectors">
+<div class="wrap">
+<h2>القطاعات: هدف واحد يُقاس به كل قطاع</h2>
+<div class="scroll"><table class="stack">
+<thead><tr><th>القطاع</th><th>التدخلات الرئيسية</th><th>الهدف بنهاية السنة 7</th></tr></thead>
+<tbody>
+<tr><td>السكن</td><td>عمارات 4–6 طوابق من طوب مصنوع من الركام المعاد تدويره، أسطح شمسية، قروض ميسرة للبناء الذاتي</td><td>11,000 وحدة دائمة</td></tr>
+<tr><td>المياه والصرف</td><td>شبكة جديدة، ربط بمحطة تحلية الشمال، صرف كامل، ري بالمياه المعالجة</td><td>100 لتر للفرد يومياً</td></tr>
+<tr><td>الطاقة</td><td>مزرعة شمسية شرقية وأسطح شمسية وبطاريات</td><td>20 ساعة كهرباء يومياً</td></tr>
+<tr><td>الصحة</td><td>مستشفى جديد، 4 مراكز رعاية أولية، مركز تأهيل وأطراف</td><td>عيادة على بعد 10 دقائق مشياً</td></tr>
+<tr><td>التعليم</td><td>14 مدرسة دائمة بدوام واحد، روضات، مركز مهني ومكتبة</td><td>لا فصل فوق 35 طالباً</td></tr>
+<tr><td>الزراعة</td><td>استصلاح التربة، آبار شمسية، بنك شتلات وحمضيات، جمعيات تعاونية</td><td>5,000 دونم مزروع</td></tr>
+<tr><td>الاقتصاد</td><td>صناعات غذائية، سوق مركزي، حاضنة للعمل الرقمي والتصميم</td><td>8,000 وظيفة</td></tr>
+<tr><td>التراث</td><td>ترميم المسجد العمري، أرشيف رقمي لقصص المدينة، متحف للذاكرة</td><td>قصة كل عائلة محفوظة</td></tr>
+<tr><td>الدعم النفسي</td><td>مرشدون في كل مدرسة، مساحات آمنة للأطفال والنساء، رعاية الأيتام</td><td>كل طفل في برنامج دعم</td></tr>
+</tbody></table></div>
+</div>
+</section>
+
+<section class="band" id="budget">
+<div class="wrap two">
+<div>
+<h2>الميزانية: السكن أولاً</h2>
+<p class="total">2.3 مليار دولار</p>
+<p>تقدير تخطيطي لا رقم رسمي، يُثبَّت بعد المسح الميداني. السكن وحده أكثر من ثلث الكلفة، تليه المياه والطاقة ثم الزراعة.</p>
+<p class="note">التمويل المقترح: صناديق عربية وإسلامية، الاتحاد الأوروبي والأمم المتحدة، بنوك التنمية، ومساهمة المغتربين عبر صندوق شفاف بلوحة بيانات علنية.</p>
+</div>
+<div class="bars" id="bars"></div>
+</div>
+</section>
+
+<section class="band green" id="time">
+<div class="wrap">
+<h2>الجدول الزمني: 7 سنوات من أول جرّافة إلى آخر مفتاح</h2>
+<div class="tl" id="tl"></div>
+<div class="axis"><span></span><div class="ticks"><span>البداية</span><span>سنة 1</span><span>سنة 2</span><span>سنة 3</span><span>سنة 4</span><span>سنة 5</span><span>سنة 6</span><span>سنة 7</span></div></div>
+</div>
+</section>
+
+<section class="band" id="risks">
+<div class="wrap">
+<h2>المخاطر وكيف نواجهها</h2>
+<div class="risks">
+<div class="risk"><h3>تجدد القتال أو بقاء السيطرة العسكرية</h3><p>لا بدء إلا بوقف نار دائم وانسحاب، وضمانات دولية لحماية مواقع العمل.</p></div>
+<div class="risk"><h3>منع مواد البناء</h3><p>طوب من الركام المعاد تدويره، وتصنيع محلي للبلوك والشبابيك.</p></div>
+<div class="risk"><h3>ذخائر تحت الركام</h3><p>لا عمل في أي مربع قبل مسحه، وتوعية مستمرة للأطفال والمزارعين.</p></div>
+<div class="risk"><h3>نزاعات الملكية</h3><p>سجل رقمي من صور ما قبل الحرب ووثائق الطابو ولجان تحكيم محلية.</p></div>
+<div class="risk"><h3>تأخر التمويل</h3><p>مراحل صغيرة قابلة للتمويل المنفصل، وتقارير شهرية علنية للمانحين.</p></div>
+<div class="risk"><h3>تلوث التربة والمياه</h3><p>فحص مخبري قبل الزراعة، ومعالجة الأسبستوس والمعادن الثقيلة.</p></div>
+</div>
+</div>
+</section>
+
+<footer class="band" id="sources">
+<div class="wrap">
+<h2 style="color:#fff">المصادر</h2>
+<ol>
+<li><a href="https://www.citypopulation.de/en/palestine/gaza/ghazzah_ash_shamaliyah/552740__beit_hanun">تعداد 2017، الجهاز المركزي للإحصاء الفلسطيني (citypopulation)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Beit_Hanoun">بيت حانون، ويكيبيديا: المساحة والسكان</a></li>
+<li><a href="https://www.aljazeera.com/news/2026/1/26/investigation-reveals-israeli-campaign-to-flatten-gaza-town-of-beit-hanoon">الجزيرة، تحقيق وحدة سند عن تجريف بيت حانون (يناير 2026)</a></li>
+<li><a href="https://www.csmonitor.com//World/Middle-East/2026/0217/gaza-palestinian-land-israel-yellow-line-border">كريستيان ساينس مونيتور عن الخط الأصفر (فبراير 2026)</a></li>
+<li><a href="https://english.ahram.org.eg/NewsContent/1/1234/541424/Egypt/Foreign-Affairs/Explainer-Everything-you-need-to-know-about-Egypt-.aspx">الأهرام: الخطة العربية المصرية للإعمار</a></li>
+<li><a href="https://www.un.org/unispal/?p=313984">الأمم المتحدة: كسّارات الركام لدى UNDP</a></li>
+<li><a href="https://ochaopt.org/sites/default/files/OCHAoPtBeitHanoun0805.pdf">أوتشا: بساتين الحمضيات في بيت حانون</a></li>
+</ol>
+<p class="note" style="color:#e6f1ea;margin-top:1em">الأرقام الخاصة بالخطة (الوحدات، الدونمات، الوظائف، الكلفة) تقديرات تخطيطية مبنية على تعداد 2017 ونمو سكاني نحو 3% سنوياً و6 أفراد للأسرة. إعداد: ساجد سعد · 2026.</p>
+</div>
+</footer>
+
+<script>
+{
+const budget=[["السكن",0.85],["المياه والصرف والطاقة",0.35],["الزراعة والغذاء",0.22],["الطرق والساحات العامة",0.20],["التعليم",0.18],["الصحة",0.15],["الاقتصاد والوظائف",0.15],["الركام والذخائر",0.10],["الدعم النفسي والتراث",0.05],["الحوكمة والطوارئ",0.05]];
+const max=Math.max(...budget.map(b=>b[1]));
+document.getElementById('bars').innerHTML=budget.map(([n,v])=>`<div class="bar"><span class="n">${n}</span><div class="t"><div class="f" style="width:${(v/max*100).toFixed(1)}%"></div></div><span class="v">$${v.toFixed(2)} B</span></div>`).join('');
+const tl=[["الذخائر والركام",0,2.5,"#7a5230"],["الإغاثة العاجلة",0,0.5,"#e8740c"],["السكن الانتقالي",0.4,2,"#e8740c"],["المياه والطاقة",0.5,4,"#1f5c3a"],["الزراعة",0.5,5,"#2f7a4c"],["المساكن الدائمة",2,7,"#1f5c3a"],["المستشفى والمدارس",2,5,"#1f5c3a"],["القلب التاريخي",3,6,"#7a5230"]];
+document.getElementById('tl').innerHTML=tl.map(([n,a,b,c])=>`<div class="tlr"><span>${n}</span><div class="track"><div class="seg" style="right:${(a/7*100).toFixed(2)}%;width:${((b-a)/7*100).toFixed(2)}%;background:${c}"></div></div></div>`).join('');
+const row=document.getElementById('rowA');
+let s='';for(let i=0;i<16;i++){const x=20+i*76+(i%2)*18;s+=`<use href="#tree" x="${x}" y="${392+(i%3)*6}"/>`;}
+row.innerHTML=s;
+}
+</script>
+</body>
+</html>
