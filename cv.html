@@ -231,6 +231,7 @@ footer{border-top:1px solid var(--line);padding:24px var(--g);display:flex;justi
   <a class="logo" href="./" data-k="back" aria-label="SAJED STUDIO"><i></i><span><b>SAJED</b><small>STUDIO</small></span></a>
   <a class="btn btn-ghost" href="./#showcase" id="pf"></a>
   <button class="btn btn-ghost lang" type="button" id="lang"></button>
+  <a class="btn btn-ghost" id="atsBtn" href="assets/cv/Sajed-Saad-CV-ATS.pdf" target="_blank" rel="noopener"></a>
   <a class="btn btn-red" id="dl1" download><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg><span></span></a>
 </header>
 <main id="cv"></main>
@@ -258,6 +259,7 @@ function render(){
  const pdf=`assets/cv/Sajed-Saad-CV-${L==='ar'?'AR':'EN'}.pdf`;
  const dl1=document.getElementById('dl1'); dl1.href=pdf; dl1.querySelector('span').textContent=t.dl;
  document.getElementById('lang').textContent=t.other;
+ document.getElementById('atsBtn').textContent=L==='ar'?'سيرة ATS للشركات':'ATS CV';
  document.getElementById('pf').textContent=t.portfolio;
  document.getElementById('foot').textContent=t.location;
  const n=i=>String(i+1).padStart(2,'0');
@@ -272,7 +274,7 @@ function render(){
    <p class="role rv">${esc(t.role)}</p>
    <p class="pitch rv">${esc(t.pitch)}</p>
    <div class="meta rv"><span><i class="dot"></i>${esc(t.available)}</span><span>${esc(t.location)}</span></div>
-   <div class="ctas rv"><a class="btn btn-red" href="${pdf}" download>${esc(t.dl)}</a><a class="btn btn-ghost" href="${D.links.phoneHref}" target="_blank" rel="noopener noreferrer">${esc(t.hire)}</a></div>
+   <div class="ctas rv"><a class="btn btn-red" href="${pdf}" download>${esc(t.dl)}</a><a class="btn btn-ghost" href="${D.links.phoneHref}" target="_blank" rel="noopener noreferrer">${esc(t.hire)}</a><a class="btn btn-ghost" href="assets/cv/Sajed-Saad-CV-ATS.pdf" target="_blank" rel="noopener">${L==='ar'?'سيرة ATS للشركات':'ATS CV for companies'}</a></div>
   </div>
   <div class="portrait" id="por" aria-hidden="true"><div class="p3d" id="p3d">
    <div class="p-glow"></div><div class="p-ring"><svg viewBox="0 0 200 200"><defs><path id="rp" d="M100,100 m-82,0 a82,82 0 1,1 164,0 a82,82 0 1,1 -164,0"/></defs><text fill="rgba(245,245,245,.7)" font-size="8.6" letter-spacing="2.4" font-family="Syncopate, Alexandria, sans-serif"><textPath href="#rp">${esc(ring)}</textPath></text></svg></div>
@@ -295,7 +297,7 @@ function render(){
    <div class="work-ph rv"><img id="wph" loading="lazy" src="assets/img/cv-work.webp" alt=""><p>${L==='ar'?'من الفكرة <em>إلى</em> العلامة المكتملة.':'From brief <em>to</em> finished brand.'}</p></div>`)}
  <section class="final" id="contact"><div class="wrap">
   <h2 class="rv">${esc(t.h.contact)}</h2><p class="rv">${esc(t.contactLine)}</p>
-  <div class="ctas rv"><a class="btn btn-red" href="${D.links.phoneHref}" target="_blank" rel="noopener noreferrer">${esc(t.hire)}</a><a class="btn btn-ghost" href="${pdf}" download>${esc(t.dl)}</a></div>
+  <div class="ctas rv"><a class="btn btn-red" href="${D.links.phoneHref}" target="_blank" rel="noopener noreferrer">${esc(t.hire)}</a><a class="btn btn-ghost" href="${pdf}" download>${esc(t.dl)}</a><a class="btn btn-ghost" href="assets/cv/Sajed-Saad-CV-ATS.pdf" target="_blank" rel="noopener">${L==='ar'?'سيرة ATS للشركات':'ATS CV for companies'}</a></div>
   <div class="links rv"><a href="mailto:${D.links.email}">${D.links.email}</a><a href="${D.links.phoneHref}" target="_blank" rel="noopener noreferrer" dir="ltr">${D.links.phone}</a><a href="${D.links.siteHref}">${D.links.site}</a><a href="${D.links.igHref}" target="_blank" rel="noopener noreferrer">${D.links.ig}</a></div>
  </div></section>`;
  window.dispatchEvent(new Event('cv:render'));
