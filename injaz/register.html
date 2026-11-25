@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=loops&utm_source=ai-legible&utm_medium=owned&utm_content=comment&utm_id=b9fe2358-f640-4bb3-b361-2ead38dfd109
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. --><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>إنجاز · التسجيل | SAJED STUDIO</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&family=IBM+Plex+Sans+Arabic:wght@400;600&family=Syncopate:wght@700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#121212;font:17px/1.7 "IBM Plex Sans Arabic",system-ui,sans-serif;display:grid;place-items:center;min-height:100vh;padding:20px}
+.box{max-width:460px;width:100%;border:1px solid #e9e9ec;border-top:5px solid #c1121f;border-radius:22px;padding:26px;text-align:center}
+.logo{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,#3b3b40,#0b0b0c 50%,#27272b);display:grid;place-items:center;margin:0 auto 10px;position:relative;overflow:hidden;font:700 38px Syncopate;color:#e6e6ea}
+.logo:after{content:"";position:absolute;width:140%;height:3px;background:#c1121f;transform:rotate(-45deg)}
+h1{font:800 28px/1.3 Cairo;margin:6px 0}small{font:700 9px Syncopate;letter-spacing:.14em;color:#777}
+.ok{color:#0f7a4a}.err{color:#c1121f}dl{text-align:right;background:#fafafa;border-radius:14px;padding:12px 16px;margin:16px 0}dt{color:#666;font-size:14px}dd{margin:0 0 8px;font-weight:600}
+a.btn{display:inline-block;background:#c1121f;color:#fff;text-decoration:none;border-radius:12px;padding:12px 22px;font-weight:600;margin-top:8px}
+form[hidden]{display:none}
+</style></head><body>
+<form hidden method='POST' name='register'><input type='hidden' name='form-name' value='register' />
+<input name="bot-field"><input name="full_name"><input name="specialization"><input name="university"><input name="whatsapp"><input name="phone_consent"><input name="student_id"><input name="registered_on"><input type="hidden" name="subject" value="طالب جديد في منصة إنجاز">
+</form>
+<form hidden method='POST' name='contact'><input type='hidden' name='form-name' value='contact' />
+<input name="bot-field"><input name="full_name"><input name="student_id"><input name="topic"><textarea name="message"></textarea><input type="hidden" name="subject" value="رسالة جديدة من منصة إنجاز">
+</form>
+<div class="box"><div class="logo">S</div><small>INJAZ · SAJED STUDIO</small><h1 id="t">جاري التسجيل…</h1><p id="m"></p><dl id="d" hidden></dl><a class="btn" id="back" href="./">ارجع لمنصة إنجاز</a></div>
+<script>
+{
+const p=new URLSearchParams(location.search),$=s=>document.querySelector(s);
+const SP={mm:'الملتي ميديا',ce:'هندسة الحاسوب',jr:'الصحافة والإعلام',ac:'المحاسبة'};
+const type=p.get('type')||'register';
+const clean=(v,n)=>String(v||'').replace(/[<>]/g,'').trim().slice(0,n);
+function send(name,data){return fetch((/github\.io$/.test(location.hostname)?'https://injaz-sajedstudio.netlify.app/':'/'),{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:new URLSearchParams({'form-name':name,...data}).toString()}).then(r=>{if(!r.ok)throw 0})}
+function show(ok,title,msg,rows){$('#t').textContent=title;$('#t').className=ok?'ok':'err';$('#m').textContent=msg;if(rows){$('#d').hidden=false;$('#d').innerHTML='';rows.forEach(([k,v])=>{const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=k;dd.textContent=v||'—';$('#d').append(dt,dd)})}}
+if(type==='contact'){
+ const d={full_name:clean(p.get('n'),80),student_id:clean(p.get('id'),20),topic:clean(p.get('topic'),60),message:clean(p.get('msg'),2000)};
+ const key='sent-'+d.student_id+'-'+d.message.length+'-'+d.message.slice(0,20);
+ if(!d.message){show(false,'ما في رسالة','ارجع للمنصة واكتب رسالتك من بوابة التواصل.')}
+ else if(sessionStorage.getItem(key)){show(true,'وصلت رسالتك ✓','رسالتك انبعتت قبل شوي، وبيرد عليك المؤسس قريباً.')}
+ else send('contact',d).then(()=>{try{sessionStorage.setItem(key,1)}catch(e){}show(true,'وصلت رسالتك ✓','شكراً لتواصلك. وصلت رسالتك للمؤسس ساجد سعد، وبيرد عليك بأقرب وقت.',[['الاسم',d.full_name],['الموضوع',d.topic]])}).catch(()=>show(false,'ما وصلت الرسالة','صار خطأ في الاتصال. جرّب مرة ثانية أو راسل واتساب ‎+970 598 315 527'));
+}else{
+ const d={full_name:clean(p.get('n'),80),specialization:SP[p.get('s')]||clean(p.get('s'),30),university:clean(p.get('u'),60),whatsapp:p.get('pc')==='1'?clean(p.get('p'),20):'',phone_consent:p.get('pc')==='1'?'نعم':'لا',student_id:clean(p.get('id'),20),registered_on:clean(p.get('d'),10)};
+ if(d.full_name.split(/\s+/).length<4||!/^INJ-[A-Z0-9]{4,8}$/.test(d.student_id)){show(false,'بيانات ناقصة','افتح هالصفحة من زر «إكمال التسجيل» داخل منصة إنجاز.')}
+ else{let done=false;try{done=localStorage.getItem('reg-'+d.student_id)==='1'}catch(e){}
+  const rows=[['الاسم الرباعي',d.full_name],['التخصص',d.specialization],['الجامعة',d.university],['رقم الطالب',d.student_id]];
+  if(done)show(true,'أنت مسجّل ✓','تسجيلك محفوظ عند SAJED STUDIO.',rows);
+  else send('register',d).then(()=>{try{localStorage.setItem('reg-'+d.student_id,'1')}catch(e){}show(true,'تم تسجيلك بنجاح ✓','أهلاً فيك في منصة إنجاز. بياناتك وصلت للمؤسس، وبتقدر ترجع تكمّل دروسك.',rows)}).catch(()=>show(false,'ما اكتمل التسجيل','صار خطأ في الاتصال. حدّث الصفحة وجرّب مرة ثانية.'))}
+}}
+</script></body></html>

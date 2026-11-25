@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8">
+<!-- This site is hosted on Netlify. Anyone can build and deploy a site
+     like this one for free: https://netlify.new/?utm_campaign=loops&utm_source=ai-legible&utm_medium=owned&utm_content=comment&utm_id=b9fe2358-f640-4bb3-b361-2ead38dfd109
+     Netlify hosting facts for this site: static/SSR served via Netlify Edge. --><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>التحقق من الشهادات · SAJED STUDIO</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;800&family=IBM+Plex+Sans+Arabic:wght@400;600&family=Cinzel:wght@700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fff;color:#121212;font:17px/1.7 "IBM Plex Sans Arabic",system-ui,sans-serif;padding:20px;display:grid;place-items:center;min-height:100vh}
+.box{max-width:560px;width:100%;border:1px solid #e9e9ec;border-top:5px solid #c1121f;border-radius:22px;padding:26px}
+.hd{text-align:center}.logo{width:60px;height:60px;border-radius:15px;background:linear-gradient(135deg,#3b3b40,#0b0b0c 50%,#27272b);display:grid;place-items:center;margin:0 auto 8px;font:700 34px Cinzel;color:#e6e6ea}
+h1{font:800 26px/1.3 Cairo;margin:4px 0}.en{font:700 12px Cinzel;letter-spacing:.12em;color:#777}
+label{display:block;font-weight:600;margin:12px 0 4px}input{width:100%;font:inherit;font-size:16px;border:1px solid #e1e1e5;border-radius:12px;padding:10px 12px;min-height:46px}
+button{width:100%;margin-top:14px;background:#c1121f;color:#fff;border:0;border-radius:12px;min-height:48px;font:inherit;font-weight:600;cursor:pointer}
+.res{margin-top:18px;border-radius:16px;padding:16px}.ok{background:#e9f6ef;border:1px solid #0f7a4a}.bad{background:#fdeced;border:1px solid #c1121f}
+.res b.t{font:800 20px Cairo;display:block}.res dl{margin:10px 0 0}.res dt{color:#555;font-size:14px}.res dd{margin:0 0 6px;font-weight:600}
+.note{font-size:13px;color:#777;margin-top:16px;text-align:center}
+</style></head><body><div class="box">
+<div class="hd"><div class="logo">S</div><h1>التحقق من الشهادات</h1><div class="en">CERTIFICATE VERIFICATION · SAJED STUDIO</div></div>
+<form id="f"><label for="id">رقم التحقق · Verification No.</label><input id="id" dir="ltr" placeholder="SS-MM-20261120-XXXXXX" required>
+<label for="n">الاسم كما هو على الشهادة · Name (Arabic)</label><input id="n" required><button>تحقّق · Verify</button></form>
+<div id="r"></div>
+<p class="note">منصة إنجاز · تأسيس وتطوير ساجد سعد · واتساب ‎+970 598 315 527</p></div>
+<script>
+{
+const C={MM:['أساسيات التصميم البصري','Visual Design Fundamentals'],CE:['أساسيات البرمجة والمنطق الرقمي','Programming & Digital Logic Basics'],JR:['كتابة الخبر والتحقق من المعلومات','News Writing & Verification'],AC:['مبادئ المحاسبة','Principles of Accounting'],SE:['السكرتارية وإدارة المكاتب','Office Administration & Secretarial Skills'],NU:['أساسيات التمريض','Fundamentals of Nursing'],PH:['أساسيات الصيدلة','Fundamentals of Pharmacy'],CL:['Claude: مساعدك الذكي في الدراسة والعمل','Working Smarter with Claude']};
+const hash=s=>{let h=5381;for(const ch of s)h=((h<<5)+h+ch.charCodeAt(0))>>>0;return h.toString(36).toUpperCase().padStart(6,'0').slice(-6)};
+const $=s=>document.querySelector(s);
+function check(id,n){id=id.trim().toUpperCase();n=n.trim().replace(/\s+/g,' ');const m=id.match(/^SS-([A-Z]{2})(\d?)-(\d{4})(\d{2})(\d{2})-([A-Z0-9]{6})$/);const r=$('#r');r.innerHTML='';const box=document.createElement('div');
+ const d=m&&`${m[3]}-${m[4]}-${m[5]}`,ok=m&&C[m[1]]&&hash(n+'|'+m[1].toLowerCase()+m[2]+'|'+d)===m[6];
+ box.className='res '+(ok?'ok':'bad');const t=document.createElement('b');t.className='t';t.textContent=ok?'✓ شهادة صحيحة · Valid certificate':'✗ غير مطابقة · Not verified';box.append(t);
+ if(ok){const dl=document.createElement('dl');[['الاسم · Name',n],[m[2]?'الوحدة · Unit':'الكورس · Course',(m[2]?'الوحدة '+m[2]+' من كورس ':'')+C[m[1]][0]+' — '+C[m[1]][1]],['تاريخ الإصدار · Issued',new Date(d+'T12:00:00').toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'})],['رقم التحقق · ID',id]].forEach(([k,v])=>{const a=document.createElement('dt'),b=document.createElement('dd');a.textContent=k;b.textContent=v;dl.append(a,b)});box.append(dl)}
+ else{const p=document.createElement('p');p.style.margin='8px 0 0';p.textContent='رقم التحقق والاسم لا يتطابقان مع شهادة صادرة من منصة إنجاز. تأكد من كتابة الاسم بالعربي تماماً كما هو على الشهادة.';box.append(p)}
+ r.append(box)}
+const q=new URLSearchParams(location.search);if(q.get('id')){$('#id').value=q.get('id');$('#n').value=q.get('n')||'';if(q.get('n'))check($('#id').value,$('#n').value)}
+$('#f').onsubmit=e=>{e.preventDefault();check($('#id').value,$('#n').value)};
+}
+</script></body></html>
